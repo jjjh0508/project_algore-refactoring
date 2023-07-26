@@ -119,11 +119,10 @@
 </head>
     <!--21_0_레시피_작성-->
 <body>
-<form action="/recipe/registForm" method="post" enctype="multipart/form-data">
+<form action="/recipe/registform" method="post" enctype="multipart/form-data">
 <main class="write01"
       style="width: 1000px; margin: 0 auto; padding-left:10px; padding-right: 10px; margin-bottom: 100px; margin-top: 100px;">
     <!--레시피 제목-->
-    <input type="hidden" name="recipeNum">
     <div class="recipeTitle" style="text-align: center; margin-bottom: 30px;">
         <div class="title fon-color" style="margin-bottom: 15px;">
             <h3><b>레시피 작성</b></h3>
@@ -146,7 +145,7 @@
                              style="background-color: #D8F0FF70; border-radius: 30px; margin-right: 20px; ">
                     </label>
                     <input type="file" id="input-file" style="display: none;" accept="image/jpeg, image/png, image/jpg"
-                           name="mainPicture" class="isFile" onchange="loadFile(event)" required="required"/>
+                           name="mainPhotoInputFile" class="isFile" onchange="loadFile(event)" required="required"/>
                 </div>
                 <!--카테고리-->
                 <div>
@@ -154,7 +153,7 @@
                            style="margin-top: 40px; margin-left: 10px;">
                         <h6><b>카테고리</b></h6>
                     </label>
-                    <select class="form-select fon-color input-box-sty pla-col" name="category" required
+                    <select class="form-select fon-color input-box-sty pla-col" name="categoryNum" required
                             style="width: 400px; border-radius: 1em;">
                         <option selected disabled value="">음식 카테고리</option>
                         <option th:each="recipeCategory:${recipeCategory}"
@@ -174,7 +173,7 @@
                 <div class="mb-3 pla-col" style="margin-top: 30px;">
                     <label for="exampleFormControlInput1" class="form-label fon-color" style="margin-left: 10px;"><b>레시피
                         제목</b></label>
-                    <input type="text" class="form-control pla-col input-box-sty" id="exampleFormControlInput1"
+                    <input type="text" name="recipeTitle" class="form-control pla-col input-box-sty" id="exampleFormControlInput1"
                            style="border-radius: 1em;" placeholder="레시피 제목을 입력하세요.">
                 </div>
             </div>
@@ -184,7 +183,7 @@
                     <h6 style="color: #085A84; margin-left: 10px;"><b>레시피 소개</b></h6>
                 </label>
                 <textarea class="form-control pla-col input-box-sty ma-2-pla" placeholder="레시피 소개를 입력하세요."
-                          id="floatingTextarea1" name="recipeDescription"
+                          id="floatingTextarea1" name="recipeIntro"
                           style="height: 310px; resize: none; border-radius: 1.5em;" maxlength="100"></textarea>
             </div>
         </div>
@@ -192,7 +191,7 @@
     <!--동영상-->
     <div class="exampleFormControlInput1 fon-colorss fon-color" style="margin-top: 15px;">
         <h6 style="margin-left: 10px;"><b>동영상 링크 첨부</b></h6>
-        <input type="text" class="form-control input-box-sty pla-col" id="" name="recipeVideo" onblur="isYoutube()"
+        <input type="text" class="form-control input-box-sty pla-col" id="" name="recipeVideoLink" onblur="isYoutube()"
                placeholder="youtube.com" style="margin-top: 15px; border-radius: 1em;">
     </div>
     <!--재료라벨-->
@@ -208,31 +207,29 @@
                 <div class="d-flex justify-content-between">
                     <!-- 재료명-->
                     <div class="form-floating fon-colors" style="margin-top: 10px;">
-                        <select class="form-control input-box-sty" maxlength="10" name="ingName"
+                        <select class="form-control input-box-sty" maxlength="10" name="ingNum"
                                 style=" width: 300px; border-radius: 1.5em; color: #085A84;">
                             <option selected disabled value="">재료명</option>
                             <option th:each="recipeIng:${recipeIng}"
                                     th:value="${recipeIng.ingNum}"
-                                    th:selected="${IngList.ingNum}==${recipeIng.ingNum}"
                                     th:text="${recipeIng.ingName}"></option>
                         </select>
                     </div>
                     <!--계량-->
                     <div class="form-floating w-100" style="margin-left: 20px; margin-top: 10px;">
-                        <input type="text" class="form-control input-box-sty" id="floatingInput4" maxlength="5" name="amount"
+                        <input type="text" class="form-control input-box-sty" id="floatingInput4" maxlength="5" name="weigh"
                                style="border-radius: 1.5em;">
                         <label for="floatingInput4"
                                style="margin-top: 10px; margin-left: 5px; color: #085A84;">계량</label>
                     </div>
                     <!-- 단위 -->
                     <div class="form-floating w-100" style="margin-left: 20px; margin-top: 10px;">
-                        <select class="form-select input-box-sty" name="riUnit"
+                        <select class="form-select input-box-sty" name="riUnitNum"
                                 style="border-radius: 1.5em; color: #085A84;">
                             <option selected disabled value="">단위</option>
-                            <option th:each="recipeUnit:${recipeUnit}"
-                                    th:value="${recipeUnit.riUnitNum}"
-                                    th:selected="${UnitList.riUnitNum}==${recipeUnit.riUnitNum}"
-                                    th:text="${recipeUnit.riUnit}"></option>
+                            <option th:each="recipeUnits:${recipeUnit}"
+                                    th:value="${recipeUnits.riUnitNum}"
+                                    th:text="${recipeUnits.riUnit}"></option>
                         </select>
                     </div>
                     <div>
@@ -252,26 +249,24 @@
                             <option selected disabled value="">재료명</option>
                             <option th:each="recipeIng:${recipeIng}"
                                     th:value="${recipeIng.ingNum}"
-                                    th:selected="${IngList.ingNum}==${recipeIng.ingNum}"
                                     th:text="${recipeIng.ingName}"></option>
                         </select>
                     </div>
                     <!--계량-->
                     <div class="form-floating w-100" style="margin-left: 20px; margin-top: 10px;">
-                        <input type="text" class="form-control input-box-sty" id="floatingInput2" maxlength="5" name="amount"
+                        <input type="text" class="form-control input-box-sty" id="floatingInput2" maxlength="5" name="weigh"
                                style="border-radius: 1.5em;">
                         <label for="floatingInput2"
                                style="margin-top: 10px; margin-left: 5px; color: #085A84;">계량</label>
                     </div>
                     <!-- 단위 -->
                     <div class="form-floating w-100" style="margin-left: 20px; margin-top: 10px;">
-                        <select class="form-select input-box-sty" name="riUnit"
+                        <select class="form-select input-box-sty" name="riUnitNum"
                                 style="border-radius: 1.5em; color: #085A84;">
                             <option selected disabled value="">단위</option>
-                            <option th:each="recipeUnit:${recipeUnit}"
-                                    th:value="${recipeUnit.riUnitNum}"
-                                    th:selected="${UnitList.riUnitNum}==${recipeUnit.riUnitNum}"
-                                    th:text="${recipeUnit.riUnit}"></option>
+                            <option th:each="recipeUnits:${recipeUnit}"
+                                    th:value="${recipeUnits.riUnitNum}"
+                                    th:text="${recipeUnits.riUnit}"></option>
                         </select>
                         </select>
                     </div>
@@ -293,26 +288,24 @@
                             <option selected disabled value="">재료명</option>
                             <option th:each="recipeIng:${recipeIng}"
                                     th:value="${recipeIng.ingNum}"
-                                    th:selected="${IngList.ingNum}==${recipeIng.ingNum}"
                                     th:text="${recipeIng.ingName}"></option>
                         </select>
                     </div>
                     <!--계량-->
                     <div class="form-floating w-100" style="margin-left: 20px; margin-top: 10px;">
-                        <input type="text" class="form-control input-box-sty" maxlength="5" name="amount"
+                        <input type="text" class="form-control input-box-sty" maxlength="5" name="weigh"
                                style="border-radius: 1.5em;">
                         <label for="floatingInput"
                                style="margin-top: 10px; margin-left: 5px; color: #085A84;">계량</label>
                     </div>
                     <!-- 단위 -->
                     <div class="form-floating w-100" style="margin-left: 20px; margin-top: 10px;">
-                        <select class="form-select input-box-sty" name="riUnit"
+                        <select class="form-select input-box-sty" name="riUnitNum"
                                 style="border-radius: 1.5em; color: #085A84;">
                             <option selected disabled value="">단위</option>
-                            <option th:each="recipeUnit:${recipeUnit}"
-                                    th:value="${recipeUnit.riUnitNum}"
-                                    th:selected="${UnitList.riUnitNum}==${recipeUnit.riUnitNum}"
-                                    th:text="${recipeUnit.riUnit}"></option>
+                            <option th:each="recipeUnits:${recipeUnit}"
+                                    th:value="${recipeUnits.riUnitNum}"
+                                    th:text="${recipeUnits.riUnit}"></option>
                         </select>
                     </div>
                     <!--삭제 버튼-->
@@ -348,18 +341,18 @@
                 <label class="input-file-button float-start">
                     <img class="detailImg" width="400px" height="270px"
                          style="background-color: #D8F0FF70; border-radius: 10px; border-radius: 30px;">
-                    <input type="file" name="recipePicture" class="isFile" style="display: none"
+                    <input type="file" name="rpFileName" class="isFile" style="display: none"
                            accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
                 </label>
             </div>
             <!--요리순서 설명-->
             <div style="margin-top: 10px; margin-left: 35px; ">
                 <textarea class="form-control input-box-sty" placeholder="설명을 입력하세요." id="floatingTextarea3"
-                          name="recipeDescription"
+                          name="rpContent"
                           style="width: 520px; height: 260px; resize: none; border-radius: 2em;"></textarea>
             </div>
             <!-- 설명에 쉼표를 넣었을때 배열로 만들지 않기위한 더미 value -->
-            <input type="text" name="recipeDescription" value="ab22bb" style="display: none">
+<!--            <input type="text" name="recipeDescription" value="ab22bb" style="display: none">-->
             <!-- 삭제 -->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle"
                  viewBox="0 0 16 16" type="button" onclick="removeDe()">
@@ -385,8 +378,8 @@
             </div>
             <!--요리 꿀팁 텍스트박스-->
             <div class="">
-                <textarea class="form-control input-box-sty" placeholder="요리 꿀팁을 작성하세요." id="floatingTextarea2"
-                          name="recipeDescription"
+                <textarea class="form-control input-box-sty"  placeholder="요리 꿀팁을 작성하세요." id="floatingTextarea2"
+                          name="tip"
                           style="height: 420px; width: 400px; margin-top: 10px; resize: none; border-radius: 2em;"></textarea>
             </div>
         </div>

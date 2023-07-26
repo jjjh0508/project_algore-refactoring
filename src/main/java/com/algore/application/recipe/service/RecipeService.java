@@ -26,8 +26,8 @@ public class RecipeService {
         List<RecipePhotoDTO> recipePhotoDTOList = mapper.recipPhoto(recipeNum);
         List<RecipeIngredientDTO> recipeIngredientDTOS = mapper.recipeIngredient(recipeNum);
         List<IngredientDTO> ingredientDTOList = mapper.ingredienList();
-        int allPrice =0;
-        for (RecipeIngredientDTO recipeIngredientDTO:recipeIngredientDTOS) {
+        int allPrice = 0;
+        for (RecipeIngredientDTO recipeIngredientDTO : recipeIngredientDTOS) {
             allPrice += recipeIngredientDTO.getPrice();
 
         }
@@ -63,52 +63,42 @@ public class RecipeService {
 
 
     public int writeRecipe(RecipeWriteDTO recipeWriteDTO) {
-
+        System.out.println(recipeWriteDTO.getCategoryNum());
         int result = mapper.writeRecipe(recipeWriteDTO);
+        if (result > 0) {
 
-        if(result > 0){
+            List<SelectProcedure> selectProcedure = recipeWriteDTO.getSelectProcedure();
 
-            List<RecipeProcedureDTO> recipeProcedureDTOList = recipeWriteDTO.getRecipeProcedureDTOList();
+            mapper.writeRecipeProduce(selectProcedure);
 
-            if(recipeProcedureDTOList != null && !recipeProcedureDTOList.isEmpty()){
-                for(RecipeProcedureDTO recipeProcedure : recipeProcedureDTOList){
-                    recipeProcedure.setRpNum(result);
-                }
-                mapper.writeRecipeProduce(recipeProcedureDTOList);
-            }
+
             List<RecipePhotoWriteDTO> recipePhotoWriteDTOList = recipeWriteDTO.getRecipePhotoWriteDTOList();
-            if (recipePhotoWriteDTOList != null && !recipePhotoWriteDTOList.isEmpty()) {
-                for (RecipePhotoWriteDTO recipePhotoWriteDTO : recipePhotoWriteDTOList) {
-                    recipePhotoWriteDTO.setRecipeNum(result);
-                }
-                mapper.writeRecipePhotos(recipePhotoWriteDTOList);
-            }
+            for (RecipePhotoWriteDTO recipePhotoWriteDTO: recipePhotoWriteDTOList) {
+                System.out.println(recipePhotoWriteDTO);
 
-            List<RecipeIngredientDTO> recipeIngredientDTOList = recipeWriteDTO.getRecipeIngredientDTOList();
-            if (recipeIngredientDTOList != null && !recipeIngredientDTOList.isEmpty()) {
-                for (RecipeIngredientDTO recipeIngredientDTO : recipeIngredientDTOList) {
-                    recipeIngredientDTO.setRecipeNum(result);
-                }
-                mapper.writeRecipeIngredients(recipeIngredientDTOList);
             }
+            mapper.writeRecipePhotos(recipePhotoWriteDTOList);
+            List<RegistIngredientDTO> registIngredientDTO = recipeWriteDTO.getIngredientDTOList();
+
+            mapper.writeRecipeIngredients(registIngredientDTO);
 
         }
         return result;
     }
 
+
     public int modifyRecipe(RecipeviewDTO recipeviewDTO) {
-        System.out.println("여기");
+
         int result = 0;
 
-        int IngDelete =  mapper.recipeIngDelete(recipeviewDTO.getRecipeNum());
+        int IngDelete = mapper.recipeIngDelete(recipeviewDTO.getRecipeNum());
         int orderDelete = mapper.orderDelete(recipeviewDTO.getRecipeNum());
 
         int photoDelete = mapper.photoDelete(recipeviewDTO.getRecipeNum());
-        System.out.println("여기");
+
         int orderResult = mapper.modifyOrder(recipeviewDTO.getModifyRecipeOrders());
-        System.out.println("여기");
+
         int IngResult = mapper.modifyIng(recipeviewDTO.getRecipeIngredientDTOS());
-        System.out.println("여기");
 
         int recipeResult = mapper.modifyRecipe(recipeviewDTO);
         int photoResult = mapper.modifyPhoto(recipeviewDTO.getRecipePhotoDTOList());
@@ -131,15 +121,19 @@ public class RecipeService {
     public List<RecipeUnitDTO> readUnit() {
 
         List<RecipeUnitDTO> recipeunit = mapper.readUnit();
-        System.out.println(recipeunit);
         return recipeunit;
     }
 
     public List<IngredientDTO> readIng() {
 
         List<IngredientDTO> recipeing = mapper.readIng();
-        System.out.println(recipeing);
         return recipeing;
+    }
+
+    public int recipeWriteNum() {
+
+        int recipeNum = mapper.recipeWriteNum();
+        return recipeNum;
     }
 }
 

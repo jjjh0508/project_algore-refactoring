@@ -47,11 +47,13 @@ public interface RecipeViewMapper {
 
     int modifyIng(List<RecipeIngredientDTO> ingredientDTOList);
 
-    int writeRecipeProduce(List<RecipeProcedureDTO> recipeProcedureDTOList);
+    int writeRecipeProduce(List<SelectProcedure> SelectProcedures);
 
     int writeRecipePhotos(List<RecipePhotoWriteDTO> recipePhotoWriteDTOList);
 
     List<IngredientDTO> readIng();
 
-    int writeRecipeIngredients(List<RecipeIngredientDTO> recipeIngredientDTOList);
+    int writeRecipeIngredients(List<RegistIngredientDTO> recipeIngredientDTOList);
+
+    int recipeWriteNum();
 }

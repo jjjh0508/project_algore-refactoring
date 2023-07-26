@@ -19,14 +19,15 @@ public class RecipeWriteDTO {
     private String tip; // 요리 팁
     private Date recipeCreateDate; // 작성 날짜
     private List<RecipeIngredientDTO> recipeIngredientDTOList; // 레시피 재료
-    private List<IngredientDTO> ingredientDTOList; // 재료
-    private List<RecipeProcedureDTO> recipeProcedureDTOList; // 레시피 단계
+    private List<RegistIngredientDTO> ingredientDTOList; // 재료
+    private List<SelectProcedure> SelectProcedure; // 레시피 단계
     private List<RecipePhotoWriteDTO> recipePhotoWriteDTOList; // 레시피 완성사진
 
+    private int categoryNum;
     public RecipeWriteDTO() {
     }
 
-    public RecipeWriteDTO(int recipeNum, int memNum, String mainPhoto, MultipartFile mainPhotoInputFile, String photoPath, List<RecipeCategoryDTO> recipeCategoryDTOList, String recipeTitle, String recipeIntro, String recipeVideoLink, String tip, Date recipeCreateDate, List<RecipeIngredientDTO> recipeIngredientDTOList, List<IngredientDTO> ingredientDTOList, List<RecipeProcedureDTO> recipeProcedureDTOList, List<RecipePhotoWriteDTO> recipePhotoWriteDTOList) {
+    public RecipeWriteDTO(int recipeNum, int memNum, String mainPhoto, MultipartFile mainPhotoInputFile, String photoPath, List<RecipeCategoryDTO> recipeCategoryDTOList, String recipeTitle, String recipeIntro, String recipeVideoLink, String tip, Date recipeCreateDate, List<RecipeIngredientDTO> recipeIngredientDTOList, List<RegistIngredientDTO> ingredientDTOList, List<com.algore.application.recipe.dto.SelectProcedure> selectProcedure, List<RecipePhotoWriteDTO> recipePhotoWriteDTOList, int categoryNum) {
         this.recipeNum = recipeNum;
         this.memNum = memNum;
         this.mainPhoto = mainPhoto;
@@ -40,12 +41,21 @@ public class RecipeWriteDTO {
         this.recipeCreateDate = recipeCreateDate;
         this.recipeIngredientDTOList = recipeIngredientDTOList;
         this.ingredientDTOList = ingredientDTOList;
-        this.recipeProcedureDTOList = recipeProcedureDTOList;
+        SelectProcedure = selectProcedure;
         this.recipePhotoWriteDTOList = recipePhotoWriteDTOList;
+        this.categoryNum = categoryNum;
     }
 
     public int getRecipeNum() {
         return recipeNum;
+    }
+
+    public int getCategoryNum() {
+        return categoryNum;
+    }
+
+    public void setCategoryNum(int categoryNum) {
+        this.categoryNum = categoryNum;
     }
 
     public void setRecipeNum(int recipeNum) {
@@ -140,20 +150,20 @@ public class RecipeWriteDTO {
         this.recipeIngredientDTOList = recipeIngredientDTOList;
     }
 
-    public List<IngredientDTO> getIngredientDTOList() {
+    public List<RegistIngredientDTO> getIngredientDTOList() {
         return ingredientDTOList;
     }
 
-    public void setIngredientDTOList(List<IngredientDTO> ingredientDTOList) {
+    public void setIngredientDTOList(List<RegistIngredientDTO> ingredientDTOList) {
         this.ingredientDTOList = ingredientDTOList;
     }
 
-    public List<RecipeProcedureDTO> getRecipeProcedureDTOList() {
-        return recipeProcedureDTOList;
+    public List<SelectProcedure> getSelectProcedure() {
+        return SelectProcedure;
     }
 
-    public void setRecipeProcedureDTOList(List<RecipeProcedureDTO> recipeProcedureDTOList) {
-        this.recipeProcedureDTOList = recipeProcedureDTOList;
+    public void setSelectProcedure(List<com.algore.application.recipe.dto.SelectProcedure> selectProcedure) {
+        SelectProcedure = selectProcedure;
     }
 
     public List<RecipePhotoWriteDTO> getRecipePhotoWriteDTOList() {
@@ -180,8 +190,9 @@ public class RecipeWriteDTO {
                 ", recipeCreateDate=" + recipeCreateDate +
                 ", recipeIngredientDTOList=" + recipeIngredientDTOList +
                 ", ingredientDTOList=" + ingredientDTOList +
-                ", recipeProcedureDTOList=" + recipeProcedureDTOList +
+                ", SelectProcedure=" + SelectProcedure +
                 ", recipePhotoWriteDTOList=" + recipePhotoWriteDTOList +
+                ", categoryNum=" + categoryNum +
                 '}';
     }
 }

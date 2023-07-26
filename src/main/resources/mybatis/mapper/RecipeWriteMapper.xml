@@ -38,30 +38,12 @@
           FROM INGREDIENT
     </select>
 
-    <insert id="writeProcedure" parameterType="java.util.List">
-        INSERT INTO RECIPE_PROCEDURE
-            (RP_NUM, RECIPE_NUM, RP_CONTENT, RP_FILE, RP_FILE_NAME, RP_PATH)
-        SELECT SEQ_RP_NUM.NEXTVAL,
-               RECIPE_NUM,
-               RP_CONTENT,
-               RP_FILE,
-               RP_FILE_NAME,
-               RP_PATH
-        FROM (
-            <foreach item="item" collection="list" separator="UNION ALL">
-                SELECT #{item.recipeNum} AS RECIPE_NUM,
-                       #{item.content} AS RP_CONTENT,
-                       #{item.fileName} AS RP_FILE_NAME,
-                       #{item.path} AS RP_PATH
-                  FROM DUAL
-            </foreach>PRO
-        )
-    </insert>
 
-    
+
+
 <insert id="writeRecipe" parameterType="com.algore.application.recipe.dto.RecipeWriteDTO">
     INSERT INTO RECIPE
-    (RECIPE_NUM, MEM_NUM, MAIN_PHOTO, PHOTO_PATH, CATEGORY_NUM, RECIPE_TITLE, RECIPE_INTRO, RECIPE_VIDEO_LINK, TIP, RECIPE_CREATE_DATE)
+    (RECIPE_NUM, MEM_NUM, MAIN_PHOTO, PHOTO_PATH, CATEGORY_NUM, RECIPE_TITLE, RECIPE_INTRO, RECIPE_VIDEO_LINK, TIP, RECIPE_CREATE_DATE,RECIPE_VIEWS)
     VALUES (SEQ_RECIPE_NUM.NEXTVAL,
             #{memNum},
             #{mainPhoto},
@@ -71,40 +53,63 @@
             #{recipeIntro},
             #{recipeVideoLink},
             #{tip},
-            SYSDATE
+            SYSDATE,
+            0
             )
 </insert>
 
-<!--<insert id="writeRecipe" parameterType="com.algore.application.recipe.dto.RecipeWriteDTO">-->
-<!--    INSERT INTO RECIPE-->
-<!--    (RECIPE_NUM, MEM_NUM, MAIN_PHOTO, PHOTO_PATH, CATEGORY_NUM, RECIPE_TITLE, RECIPE_INTRO, RECIPE_VIDEO_LINK, TIP, RECIPE_CREATE_DATE)-->
-<!--    VALUES (SEQ_RECIPE_NUM.NEXTVAL,-->
-<!--            #{memNum},-->
-<!--            #{mainPhoto},-->
-<!--            #{photoPath},-->
-<!--            #{categoryNum},-->
-<!--            #{recipeTitle},-->
-<!--            #{recipeIntro},-->
-<!--            #{recipeVideoLink},-->
-<!--            #{tip},-->
-<!--            SYSDATE-->
-<!--            )-->
-<!--</insert>-->
+    <insert id="writeRecipeProduce" parameterType="java.util.List">
+        INSERT INTO RECIPE_PROCEDURE
+        (RP_NUM, RECIPE_NUM, RP_CONTENT, RP_FILE_NAME, RP_PATH)
+        SELECT SEQ_RP_NUM.NEXTVAL,
+        SEQ_RECIPE_NUM.CURRVAL ,
+        PRO.*
+        FROM (
+        <foreach item="item" collection="list" separator="UNION ALL">
+            SELECT
+            #{item.rpContent} AS RP_CONTENT,
+            #{item.rpFileName} AS RP_FILE_NAME,
+            #{item.rpPath} AS RP_PATH
+            FROM DUAL
+        </foreach>
+        )PRO
+    </insert>
 
-<!--    <insert id="recipeIngredient" parameterType="java.util.List">-->
-<!--        INSERT INTO RECIPE_INGREDIENT-->
-<!--        (ING_NUM, RECIPE_NUM, WEIGH, RI_UNIT)-->
-<!--        SELECT ING_NUM, RECIPE_NUM, WEIGH, RI_UNIT-->
-<!--          FROM(-->
-<!--              <foreach collection="list" item="item" separator="UNION ALL">-->
-<!--                  SELECT #{item.ingNum} AS ING_NUM,-->
-<!--                         #{item.recipeNum} AS RECIPE_NUM,-->
-<!--                         #{item.weigh} AS WEIGH,-->
-<!--                         #{item.riUnit} AS RI_UNIT-->
-<!--                  FROM DUAL-->
-<!--              </foreach> ING-->
-<!--              )-->
-<!--    </insert>-->
+    <insert id="writeRecipeIngredients" parameterType="java.util.List">
+        INSERT INTO RECIPE_INGREDIENT
+        (RECIPE_NUM,ING_NUM, WEIGH, RI_UNIT_NUM)
+        select SEQ_RECIPE_NUM.CURRVAL ,
+        INGR.*
+          FROM(
+              <foreach collection="list" item="item" separator="UNION ALL">
+                  SELECT
+                      #{item.ingName} AS ING_NUM,
+                         #{item.weigh} AS WEIGH,
+                         #{item.riUnitNum} AS RI_UNIT_NUM
+                  FROM DUAL
+              </foreach>
+              )INGR
+    </insert>
+
+    <insert id = "writeRecipePhotos" parameterType="java.util.List">
+            INSERT INTO RECIPE_PHOTO
+            (RECIPE_NUM, PHOTO_NUMBER, RECIPE_FILE_NAME, RECIPE_PATH)
+            SELECT  SEQ_RECIPE_NUM.CURRVAL, SEQ_PHOTO_NUMBER.NEXTVAL,RP.*
+                FROM(
+        <foreach collection="list" item="item" separator="UNION ALL">
+                SELECT
+                    #{item.recipeFileName} AS RECIPE_FILE_NAME ,
+                    #{item.recipePhotoPath} AS RECIPE_PATH
+                FROM DUAL
+        </foreach>
+                   )RP
+        </insert>
+
+    <select id="recipeWriteNum">
+         SELECT SEQ_RECIPE_NUM.CURRVAL
+        FROM DUAL
+    </select>
+
 
 <!--    <insert id="recipeProcedure" parameterType="java.util.List">-->
 <!--    </insert>-->
