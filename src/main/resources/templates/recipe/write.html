@@ -207,7 +207,7 @@
                 <div class="d-flex justify-content-between">
                     <!-- 재료명-->
                     <div class="form-floating fon-colors" style="margin-top: 10px;">
-                        <select class="form-control input-box-sty" maxlength="10" name="ingNum"
+                        <select class="form-control input-box-sty" maxlength="10" name="ingName"
                                 style=" width: 300px; border-radius: 1.5em; color: #085A84;">
                             <option selected disabled value="">재료명</option>
                             <option th:each="recipeIng:${recipeIng}"
@@ -318,8 +318,6 @@
                         </svg>
 
                     </div>
-
-
                 </div>
             <span id="addgreen"></span>
             <!--재료 추가 버튼-->
@@ -501,7 +499,7 @@
     var greenForm = document.querySelector('#REgreen');
     var addgreen = document.querySelector('#addgreen');
 
-    var countR = document.querySelectorAll('.REgreenC').length + 1;
+    var countR = document.querySelectorAll('.REgreenC').length+1;
     // var countN = document.querySelectorAll('.REgreenC').length + 1;
 
 
@@ -511,28 +509,20 @@
             addgreen.append(greenForm.cloneNode(true));
 
             countR++;
-
+            console.log(countR)
         }
     }
 
     function removeGr() {
         let greenFormClass = document.querySelectorAll('.REgreenC');
-        if (countR > 2) {
+        if (countR > 1) {
             greenFormClass[greenFormClass.length - 1].remove();
+            countR--
         }
 
-        console.log(countN);
-        countR--
+        console.log(countR)
     }
 
-    function removeGrN() {
-        var greenFormClass = document.querySelectorAll('.RECIPEING');
-        if (countR > 2) {
-            greenFormClass[greenFormClass.length - 1].remove();
-            countR--;
-
-        }
-    }
 
 
 </script>
@@ -541,36 +531,27 @@
     var counte = document.querySelectorAll('.REdetailD').length + 1;
     var count = document.querySelectorAll('.REdetailC').length + 1;
 
-
     var detailForm = document.querySelector('#REdetailD');
     var addplace = document.querySelector('#addplace');
 
 
     function addDe() {
-        if (counte <= 20) {
+        if (count <= 10) {
+
             addplace.appendChild(detailForm.cloneNode(true));
-            counte++;
-
+            count++;
+            console.log(count)
 
         }
 
     }
-
-    function removeDe() {
-        var detailFormClass = document.querySelectorAll('.REdetailC');
-        if (count > 2) {
-            detailFormClass[detailFormClass.length - 1].remove();
-            count--;
-        }
-
-    }
-
 
     function removeDeP() {
         var detailFormClass = document.querySelectorAll('.REdetailD');
-        if (counte > 1) {
-            detailFormClass[detailFormClass.length - 1].remove();
-            counte--;
+        if (count > 1) {
+            detailFormClass[detailFormClass.length -1 ].remove();
+            count--;
+            console.log(count)
         }
 
     }

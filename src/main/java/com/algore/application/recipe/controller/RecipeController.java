@@ -162,15 +162,13 @@ public class RecipeController {
 
                 }
             }
-
+            System.out.println("재료 갯수 테스트 "+ingNum.length);
             // 재료
             for (int i = 0; i < ingNum.length; i++) {
-                if (!(ingNum[i] == 0)) {
                     recipeIngredientDTOS.add(new RegistIngredientDTO(ingNum[i], Integer.parseInt(weigh[i]), riUnitNum[i]));
                     System.out.println(ingNum[i] + "이름");
                     System.out.println(weigh[i] + "용량");
                     System.out.println(riUnitNum[i] + "단위");
-                }
             }
 
             for (SelectProcedure selectProcedure : selectProcedures) {
