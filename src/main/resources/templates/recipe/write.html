@@ -141,7 +141,7 @@
                     <!--사진등록 및 경로-->
                     <label class="input-file-button float-start" for="input-file"
                            style="width: 400px; height: 300px; background-color: #D8F0FF70; border-radius: 30px;">
-                        <img id="output" class="" width="400px" height="300px"
+                        <img id="output" class=""  src="/img/file-upload.svg" width="400px" height="300px"
                              style="background-color: #D8F0FF70; border-radius: 30px; margin-right: 20px; ">
                     </label>
                     <input type="file" id="input-file" style="display: none;" accept="image/jpeg, image/png, image/jpg"
@@ -239,7 +239,7 @@
                         </svg>
                     </div>
                 </div>
-
+            </div>
                 <!--재료입력2-->
                 <div class="d-flex justify-content-between">
                     <!-- 재료명-->
@@ -316,13 +316,15 @@
                             <path
                                     d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                         </svg>
-                        <span id="addgreen"></span>
+
                     </div>
                 </div>
-            </div>
+
+
+            <span id="addgreen"></span>
             <!--재료 추가 버튼-->
             <div class="d-grid gap-1 col-12 mx-auto" style="margin-top: 10px;">
-                <button class="btn btn-primary but-off-color" onclick="addGr()">추가</button>
+                <button  type="button" class="btn btn-primary but-off-color" onclick="addGr()">추가</button>
             </div>
         </div>
     </div>
@@ -339,7 +341,7 @@
             <!-- 이미지 미리보기 이미지 파일 -->
             <div class="align-items-center" style="margin-top: 15px;">
                 <label class="input-file-button float-start">
-                    <img class="detailImg" width="400px" height="270px"
+                    <img class="detailImg" src="/img/file-upload.svg" width="400px" height="270px"
                          style="background-color: #D8F0FF70; border-radius: 10px; border-radius: 30px;">
                     <input type="file" name="rpFileName" class="isFile" style="display: none"
                            accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
@@ -347,7 +349,7 @@
             </div>
             <!--요리순서 설명-->
             <div style="margin-top: 10px; margin-left: 35px; ">
-                <textarea class="form-control input-box-sty" placeholder="설명을 입력하세요." id="floatingTextarea3"
+                <textarea class="form-control input-box-sty" placeholder="설명을 입력하세요." id="floatingTextarea5"
                           name="rpContent"
                           style="width: 520px; height: 260px; resize: none; border-radius: 2em;"></textarea>
             </div>
@@ -363,6 +365,40 @@
         </div>
 
         <span id="addplace"></span>
+
+        <!--복사할 엘리먼트-->
+
+        <div style="display: none">
+            <div id="REdetailD" class="REdetailD d-flex justify-content-center">
+                <div class="align-items-center" style="margin-top: 15px;">
+                    <label class="input-file-button float-start">
+                        <img class="detailImg" width="400px" height="270px"
+                             style="background-color: #D8F0FF70; border-radius: 10px; border-radius: 30px;"
+                             src="/img/file-upload.svg">
+
+                        <input type="file" name="rpFileName" class="isFile" style="display: none"
+                               accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
+
+                    </label>
+                </div>
+                <!--요리순서 설명-->
+                <div style="margin-top: 10px; margin-left: 35px; ">
+                <textarea name="rpContent"
+                          class="form-control input-box-sty" placeholder="설명을 입력하세요." id="floatingTextarea3"
+                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;"></textarea>
+                </div>
+                <!--                    <input type="text" name="orderContent" value="ab22bb"-->
+                <!--                           style="display: none">-->
+                <!--                    <input type="text" value="ab22bb" style="display: none">-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-x-circle"
+                     viewBox="0 0 16 16" type="button" onclick="removeDeP()">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </div>
+        </div>
     </div>
     <!--추가 버튼-->
     <div class="d-grid" style="margin-top: 10px; padding-left: 0px; padding-right: 30px;">
@@ -394,7 +430,7 @@
                     <!--사진1-->
                     <div class="col" style="margin-right: 20px; margin-bottom: 10px;">
                         <label class="input-file-button">
-                            <img class="detailImg mx-auto" width="250px" height="200px"
+                            <img class="detailImg mx-auto"  src="/img/file-upload.svg" width="250px" height="200px"
                                  style="background-color: #D8F0FF70;; border-radius: 10px;  margin-top: 10px; border-radius: 30px;">
                             <input type="file" name="recipePicture" class="isFile" style="display: none"
                                    accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
@@ -403,7 +439,7 @@
                     <!--사진2-->
                     <div class="col">
                         <label class="input-file-button" style="margin-bottom: 10px;">
-                            <img class="detailImg mx-auto" width="250px" height="200px"
+                            <img class="detailImg mx-auto"  src="/img/file-upload.svg" width="250px" height="200px"
                                  style="background-color: #D8F0FF70; border-radius: 10px;  margin-top: 10px; margin-right: 100px; border-radius: 30px;">
                             <input type="file" name="recipePicture" class="isFile" style="display: none"
                                    accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
@@ -414,7 +450,7 @@
                     <!--사진3-->
                     <div class="col" style="margin-right: 20px;">
                         <label class="input-file-button">
-                            <img class="detailImg mx-auto" width="250px" height="200px"
+                            <img class="detailImg mx-auto"  src="/img/file-upload.svg" width="250px" height="200px"
                                  style="background-color: #D8F0FF70; border-radius: 10px;  margin-top: 10px; border-radius: 30px;">
                             <input type="file" name="recipePicture" class="isFile" style="display: none"
                                    accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
@@ -423,7 +459,7 @@
                     <!--사진4-->
                     <div class="col">
                         <label class="input-file-button">
-                            <img class="detailImg mx-auto" width="250px" height="200px"
+                            <img class="detailImg mx-auto"  src="/img/file-upload.svg"  width="250px" height="200px"
                                  style="background-color: #D8F0FF70; border-radius: 10px; margin-top: 10px; border-radius: 30px;">
                             <input type="file" name="recipePicture" class="isFile" style="display: none"
                                    accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
@@ -446,63 +482,93 @@
         </a>
 
     </div>
+
+
     </main>
     </form>
 </div>
 
-<script>
+< <script th:inline="javascript">
 
-    var greenForm = document.querySelector('#REgreen');
-    var addgreen = document.querySelector('#REgreenC');
-    var count = 3;
+    var greenForm = document.querySelector('#REgreenC');
+    var addgreen = document.querySelector('#addgreen');
+
+    var countR = document.querySelectorAll('.REgreenC').length + 1;
+    // var countN = document.querySelectorAll('.REgreenC').length + 1;
+
 
     function addGr() {
-        if (count <= 20) {
+        if (countR <= 10) {
+            console.log()
             addgreen.append(greenForm.cloneNode(true));
-            document.querySelectorAll('.REgreenC')[document
-                .querySelectorAll('.REgreenC').length - 1].childNodes[1].childNodes[1].childNodes[1].value = "";
-            document.querySelectorAll('.REgreenC')[document
-                .querySelectorAll('.REgreenC').length - 1].childNodes[5].childNodes[1].childNodes[1].childNodes[3].childNodes[3].value = "";
 
-            count++;
+            countR++;
+
         }
     }
 
-    function removeGr() {
-        var greenFormClass = document.querySelectorAll('.REgreenC');
-        if (count > 1) {
+    function removeGrr() {
+        let greenFormClass = document.querySelectorAll('.REgreenC');
+        if (countR > 2) {
             greenFormClass[greenFormClass.length - 1].remove();
-            count--;
+        }
+
+        console.log(countN);
+        countR--
+    }
+
+    function removeGrN() {
+        var greenFormClass = document.querySelectorAll('.RECIPEING');
+        if (countR > 2) {
+            greenFormClass[greenFormClass.length - 1].remove();
+            countR--;
+
         }
     }
 
 
-    var detailForm = document.querySelector('#REdetail');
+</script>
+<script th:inline="javascript">
+
+    var counte = document.querySelectorAll('.REdetailD').length + 1;
+    var count = document.querySelectorAll('.REdetailC').length + 1;
+
+
+    var detailForm = document.querySelector('#REdetailD');
     var addplace = document.querySelector('#addplace');
-    var count = 20;
+
 
     function addDe() {
-        if (count <= 20) {
+        if (counte <= 20) {
             addplace.appendChild(detailForm.cloneNode(true));
-            document.querySelectorAll('.REdetailC')[document
-                .querySelectorAll('.REdetailC').length - 1].childNodes[1].childNodes[1].childNodes[1].value = "";
-            document.querySelectorAll('.REdetailC')[document
-                .querySelectorAll('.REdetailC').length - 1].childNodes[5].childNodes[1].childNodes[1].childNodes[3].childNodes[3].value = "";
+            counte++;
 
-            count++;
+
         }
 
     }
 
     function removeDe() {
         var detailFormClass = document.querySelectorAll('.REdetailC');
-        if (count > 1) {
+        if (count > 2) {
             detailFormClass[detailFormClass.length - 1].remove();
             count--;
         }
 
     }
 
+
+    function removeDeP() {
+        var detailFormClass = document.querySelectorAll('.REdetailD');
+        if (counte > 1) {
+            detailFormClass[detailFormClass.length - 1].remove();
+            counte--;
+        }
+
+    }
+</script>
+
+<script th:inline="javascript">
     function loadFile(event) {
         var output = document.getElementById('output');
         output.src = URL.createObjectURL(event.target.files[0]);
@@ -516,11 +582,11 @@
     var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/i;
     var fileSize;
 
-    function checkMainPic() {
-        if (imgFile[0].value == "") {
-            alert("대표 이미지를 넣어주세요.");
-        }
-    };
+    // function checkMainPic() {
+    //     if (imgFile[0].value == "") {
+    //         alert("대표 이미지를 넣어주세요.");
+    //     }
+    // };
 
     function imgCheck() {
         for (var i = 0; i < imgFile.length; i++) {
@@ -546,6 +612,18 @@
         imgCheck()
 
     };
+
+    var youUrl = /(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/g;
+
+    function isYoutube() {
+        var youtube = document.querySelector('[name="youtube"]');
+        console.log(youUrl)
+        if (!youUrl.test(youtube.value)) {
+            alert("유튜브 주소는 embed이 포함된 고유주소로 입력해주세요")
+
+        }
+
+    }
 
 </script>
 </body>
