@@ -154,8 +154,8 @@
                             <!--이메일 입력-->
                             <div class="form-floating">
                                 <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="id" style="width: 260px;" required oninvalid="this.setCustomValidity('이메일을 입력해주세요 해주세요')">
-                                <label for="username">이메일</label>
+                                       placeholder="id" style="width: 260px;" required>
+                                <label for="email">이메일</label>
                             </div>
                         </td>
                         <td>
@@ -203,7 +203,7 @@
         }
 
 
-        let memId = fetch("http://localhost:8080/findId?username="+username ,{ method: "GET"}
+        let memId = fetch("http://192.168.0.126:8080/findId?username="+username ,{ method: "GET"}
         ).then(res => res.text())
             .then(data => find(data))
             .catch(err => console.log(err));

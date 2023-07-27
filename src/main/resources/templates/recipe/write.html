@@ -145,7 +145,7 @@
                              style="background-color: #D8F0FF70; border-radius: 30px; margin-right: 20px; ">
                     </label>
                     <input type="file" id="input-file"  style="display: none;" accept="image/jpeg, image/png, image/jpg"
-                           name="mainPhotoInputFile" class="isFile" onchange="loadFile(event)" required/>
+                           name="mainPhotoInputFile" class="isFile" onchange="loadFile(event)"/>
                 </div>
                 <!--카테고리-->
                 <div>
@@ -174,7 +174,7 @@
                     <label for="exampleFormControlInput1" class="form-label fon-color" style="margin-left: 10px;"><b>레시피
                         제목</b></label>
                     <input type="text" name="recipeTitle" class="form-control pla-col input-box-sty" id="exampleFormControlInput1"
-                           style="border-radius: 1em;" placeholder="레시피 제목을 입력하세요." required>
+                           style="border-radius: 1em;" placeholder="레시피 제목을 입력하세요.">
                 </div>
             </div>
             <!--레시피 소개-->
@@ -184,7 +184,7 @@
                 </label>
                 <textarea class="form-control pla-col input-box-sty ma-2-pla" placeholder="레시피 소개를 입력하세요."
                           id="floatingTextarea1" name="recipeIntro"
-                          style="height: 310px; resize: none; border-radius: 1.5em;" maxlength="100" required></textarea>
+                          style="height: 310px; resize: none; border-radius: 1.5em;" maxlength="100"></textarea>
             </div>
         </div>
     </div>
@@ -351,7 +351,13 @@
             <div style="margin-top: 10px; margin-left: 35px; ">
                 <textarea class="form-control input-box-sty" placeholder="설명을 입력하세요." id="floatingTextarea5"
                           name="rpContent"
-                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;" required   oninvalid="this.setCustomValidity('요리 설명을 입력해주세요')" ></textarea>
+                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;" ></textarea>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-pin-angle" viewBox="0 0 16 16">
+                    <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z"/>
+                </svg>
             </div>
             <!-- 설명에 쉼표를 넣었을때 배열로 만들지 않기위한 더미 value -->
 <!--            <input type="text" name="recipeDescription" value="ab22bb" style="display: none">-->
@@ -377,7 +383,7 @@
                              src="/img/file-upload.svg">
 
                         <input type="file" name="rpFileName" class="isFile" style="display: none"
-                               accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);" required>
+                               accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);" >
 
                     </label>
                 </div>
@@ -385,7 +391,7 @@
                 <div style="margin-top: 10px; margin-left: 35px; ">
                 <textarea class="form-control input-box-sty" placeholder="설명을 입력하세요."
                           name="rpContent"
-                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;" required   oninput="setCustomValidity('요리 설명을 입력하세요')"></textarea>
+                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;"></textarea>
                     </div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-x-circle"
