@@ -73,7 +73,7 @@ public class RecipeController {
                                   @RequestParam(value = "recipePicture", required = false) List<MultipartFile> rPcFile,
                                   @RequestParam(value = "ingName", required = false) int[] ingNum,
                                   @RequestParam(value = "weigh", required = false) String[] weigh,
-                                  @RequestParam(value = "riUnitNum", required = false) int[] riUnitNum ,
+                                  @RequestParam(value = "riUnitNum", required = false) int[] riUnitNum,
                                   RedirectAttributes rttr
     ) {
 
@@ -111,7 +111,9 @@ public class RecipeController {
 
             }
             //메인사진 끝
-
+            for (String cont : rpContent) {
+                System.out.println(cont);
+            }
             System.out.println("요리 순서 시작전");
             // 요리 순서 로직
             for (int i = 0; i < rpContent.size(); i++) {
@@ -123,8 +125,9 @@ public class RecipeController {
                     System.out.println("요리 순서 if문");
 
                     String defalutImg = "/notimg.png";
-                    selectProcedures.add(new SelectProcedure(recipeNum, rpContent.get(i), defalutImg, path));
-
+                    if (!rpContent.get(i).isEmpty()) {
+                        selectProcedures.add(new SelectProcedure(recipeNum, rpContent.get(i), defalutImg, path));
+                    }
                 } else {
                     File file = new File(path);
 
@@ -155,7 +158,7 @@ public class RecipeController {
 
                     String photoName = simpleDateFormat.format(new Date(System.currentTimeMillis())) + "." + completeName.substring(completeName.lastIndexOf(".") + 1);
                     rPcFile.get(i).transferTo(new File(path + "\\" + photoName));
-                    recipePhotoWriteDTOList.add(new RecipePhotoWriteDTO(photoName, "/upload/basic")); //완성사진 모우기
+                    recipePhotoWriteDTOList.add(new RecipePhotoWriteDTO(photoName, "/upload/basic/")); //완성사진 모우기
 
                 }
             }
@@ -163,7 +166,7 @@ public class RecipeController {
             // 재료
             for (int i = 0; i < ingNum.length; i++) {
                 if (!(ingNum[i] == 0)) {
-                    recipeIngredientDTOS.add(new RegistIngredientDTO(ingNum[i] , Integer.parseInt(weigh[i]), riUnitNum[i]));
+                    recipeIngredientDTOS.add(new RegistIngredientDTO(ingNum[i], Integer.parseInt(weigh[i]), riUnitNum[i]));
                     System.out.println(ingNum[i] + "이름");
                     System.out.println(weigh[i] + "용량");
                     System.out.println(riUnitNum[i] + "단위");
@@ -174,8 +177,8 @@ public class RecipeController {
                 System.out.println("요리 순서");
                 System.out.println(selectProcedure);
             }
-                
-            
+
+
             for (RecipePhotoWriteDTO recipePhotoWriteDTO : recipePhotoWriteDTOList) {
                 System.out.println("완성사진");
                 System.out.println(recipePhotoWriteDTO);
@@ -185,7 +188,7 @@ public class RecipeController {
                 System.out.println(recipeIngredientDTO);
             }
 
-            AuthUserDTO user = (AuthUserDTO)authentication.getPrincipal();
+            AuthUserDTO user = (AuthUserDTO) authentication.getPrincipal();
             recipeWriteDTO.setMemNum(user.getMemNum());
             recipeWriteDTO.setRecipePhotoWriteDTOList(recipePhotoWriteDTOList);
             recipeWriteDTO.setIngredientDTOList(recipeIngredientDTOS);
@@ -198,7 +201,7 @@ public class RecipeController {
             if (result > 0) {
                 int writeRecipeNum = recipeService.recipeWriteNum();
                 rttr.addFlashAttribute("message", "등록이 완료되었습니다.");
-                model.setViewName("redirect:/recipe/view?recipe="+writeRecipeNum);
+                model.setViewName("redirect:/recipe/view?recipe=" + writeRecipeNum);
             } else {
                 model.addObject("message", "등록에 실패하였습니다.");
                 model.setViewName("common/error");

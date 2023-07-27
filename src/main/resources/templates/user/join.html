@@ -90,7 +90,7 @@
                 <h1 class="h1 mb-5 fw-bold" style="color: #208BCE;">회원가입</h1>
                 <!--이름 입력 영역-->
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="id">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="id" required oninvalid="this.setCustomValidity('이름을 입력 해주세요')">
                     <label for="username">이름</label>
                 </div>
                 <!--아이디 입력 영역-->
@@ -100,7 +100,7 @@
                             <!--아이디 입력-->
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="username" name="username"
-                                       placeholder="id" value = ""  style="width: 260px;">
+                                       placeholder="id" value = ""  style="width: 260px;"required oninvalid="this.setCustomValidity('아이디를 입력해주세요 ')">
                                 <label for="username">아이디</label>
                             </div>
                         </td>
@@ -108,7 +108,7 @@
                             <!--아이디 중복 확인-->
                             <div id="CId">
 
-                                <button type="button" id="butWithFun" class="btn btn-info but-off-color"
+                                <button  type="button" id="butWithFun" class="btn btn-info but-off-color"
                                         style="width: 100px; height: 55px;">중복</button>
 
 
@@ -139,12 +139,12 @@
 
                 <!--비밀번호 입력 영역-->
                 <div class="form-floating" style="margin-top: 15px;">
-                    <input type="text" class="form-control" id="password" name="password" placeholder="id">
+                    <input type="text" class="form-control" id="password" name="password" placeholder="id" required oninvalid="this.setCustomValidity('비밀번호를 입력 해주세요')">
                     <label for="username">비밀번호</label>
                 </div>
                 <!--생년월일 입력 영역-->
                 <div class="form-floating" style="margin-top: 15px;">
-                    <input type="date" class="form-control" id="birth" name="birth" placeholder="id">
+                    <input type="date" class="form-control" id="birth" name="birth" placeholder="id" required oninvalid="this.setCustomValidity('생년월일을 입력 해주세요')">
                     <label for="username">생년월일</label>
                 </div>
                 <!--이메일 입력 영역-->
@@ -154,7 +154,7 @@
                             <!--이메일 입력-->
                             <div class="form-floating">
                                 <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="id" style="width: 260px;">
+                                       placeholder="id" style="width: 260px;" required oninvalid="this.setCustomValidity('이메일을 입력해주세요 해주세요')">
                                 <label for="username">이메일</label>
                             </div>
                         </td>
@@ -178,10 +178,10 @@
                     <button class="btn btn-lg btn-primary but-off-color" type="button"
                             style="margin-right: 20px;"><b>이전</b></button>
                     <!--회원가입 버튼-->
-                    <button type="submit" class="btn btn-lg btn-primary but-off-color" role="button">
+                    <button type="submit" disabled  id="joinbtn" class="btn btn-lg btn-primary but-off-color joinbtn" role="button">
                         <b>회원가입</b>
                     </button>
-<!--                    <button class="btn btn-lg btn-primary but-off-color" type="submit"><b>회원가입</b></button>-->
+                    <!--                    <button class="btn btn-lg btn-primary but-off-color" type="submit"><b>회원가입</b></button>-->
                 </div>
             </form>
         </div>
@@ -191,9 +191,9 @@
 </html>
 <script th:inline="javascript">
 
-
+    let button = document.querySelector("#joinbtn");
     let findId = document.getElementById("CheckId");
-
+    let joindate =0;
     document.getElementById('butWithFun').addEventListener('click',function(){
         var username = $("#username").val();
         if(username.length == 0 ){
@@ -203,7 +203,7 @@
         }
 
 
-        let memId = fetch("http://localhost:8081/findId?username="+username ,{ method: "GET"}
+        let memId = fetch("http://localhost:8080/findId?username="+username ,{ method: "GET"}
         ).then(res => res.text())
             .then(data => find(data))
             .catch(err => console.log(err));
@@ -215,9 +215,21 @@
 
 
     function find(data){
+        joindate =data;
         console.log(data)
-        findId.innerHTML= "<div>"+data+"</div>";
+        console.log(joindate)
+        if (data==1){
+            findId.innerHTML= "<div>"+"사용 할 수 있는 아이디 입니다."+"</div>";
+            button.disabled = false
+        }else {
+            findId.innerHTML= "<div>"+"사용 할 수 없는 아이디 입니다."+"</div>";
+            button.disabled = true;
+        }
+
 
     }
-</script>
 
+
+
+
+</script>

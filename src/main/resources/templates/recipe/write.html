@@ -144,8 +144,8 @@
                         <img id="output" class=""  src="/img/file-upload.svg" width="400px" height="300px"
                              style="background-color: #D8F0FF70; border-radius: 30px; margin-right: 20px; ">
                     </label>
-                    <input type="file" id="input-file" style="display: none;" accept="image/jpeg, image/png, image/jpg"
-                           name="mainPhotoInputFile" class="isFile" onchange="loadFile(event)" required="required"/>
+                    <input type="file" id="input-file"  style="display: none;" accept="image/jpeg, image/png, image/jpg"
+                           name="mainPhotoInputFile" class="isFile" onchange="loadFile(event)" required/>
                 </div>
                 <!--카테고리-->
                 <div>
@@ -153,7 +153,7 @@
                            style="margin-top: 40px; margin-left: 10px;">
                         <h6><b>카테고리</b></h6>
                     </label>
-                    <select class="form-select fon-color input-box-sty pla-col" name="categoryNum" required
+                    <select class="form-select fon-color input-box-sty pla-col"  required name="categoryNum"
                             style="width: 400px; border-radius: 1em;">
                         <option selected disabled value="">음식 카테고리</option>
                         <option th:each="recipeCategory:${recipeCategory}"
@@ -174,7 +174,7 @@
                     <label for="exampleFormControlInput1" class="form-label fon-color" style="margin-left: 10px;"><b>레시피
                         제목</b></label>
                     <input type="text" name="recipeTitle" class="form-control pla-col input-box-sty" id="exampleFormControlInput1"
-                           style="border-radius: 1em;" placeholder="레시피 제목을 입력하세요.">
+                           style="border-radius: 1em;" placeholder="레시피 제목을 입력하세요." required>
                 </div>
             </div>
             <!--레시피 소개-->
@@ -184,7 +184,7 @@
                 </label>
                 <textarea class="form-control pla-col input-box-sty ma-2-pla" placeholder="레시피 소개를 입력하세요."
                           id="floatingTextarea1" name="recipeIntro"
-                          style="height: 310px; resize: none; border-radius: 1.5em;" maxlength="100"></textarea>
+                          style="height: 310px; resize: none; border-radius: 1.5em;" maxlength="100" required></textarea>
             </div>
         </div>
     </div>
@@ -318,9 +318,9 @@
                         </svg>
 
                     </div>
+
+
                 </div>
-
-
             <span id="addgreen"></span>
             <!--재료 추가 버튼-->
             <div class="d-grid gap-1 col-12 mx-auto" style="margin-top: 10px;">
@@ -344,24 +344,24 @@
                     <img class="detailImg" src="/img/file-upload.svg" width="400px" height="270px"
                          style="background-color: #D8F0FF70; border-radius: 10px; border-radius: 30px;">
                     <input type="file" name="rpFileName" class="isFile" style="display: none"
-                           accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
+                           accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);" required oninvalid="this.setCustomValidity('요리 사진을 업로드 해주세요')">
                 </label>
             </div>
             <!--요리순서 설명-->
             <div style="margin-top: 10px; margin-left: 35px; ">
                 <textarea class="form-control input-box-sty" placeholder="설명을 입력하세요." id="floatingTextarea5"
                           name="rpContent"
-                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;"></textarea>
+                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;" required   oninvalid="this.setCustomValidity('요리 설명을 입력해주세요')" ></textarea>
             </div>
             <!-- 설명에 쉼표를 넣었을때 배열로 만들지 않기위한 더미 value -->
 <!--            <input type="text" name="recipeDescription" value="ab22bb" style="display: none">-->
             <!-- 삭제 -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle"
-                 viewBox="0 0 16 16" type="button" onclick="removeDe()">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-            </svg>
+<!--            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle"-->
+<!--                 viewBox="0 0 16 16" type="button" onclick="removeDe()">-->
+<!--                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>-->
+<!--                <path-->
+<!--                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>-->
+<!--            </svg>-->
         </div>
 
         <span id="addplace"></span>
@@ -377,19 +377,16 @@
                              src="/img/file-upload.svg">
 
                         <input type="file" name="rpFileName" class="isFile" style="display: none"
-                               accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
+                               accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);" required>
 
                     </label>
                 </div>
                 <!--요리순서 설명-->
                 <div style="margin-top: 10px; margin-left: 35px; ">
-                <textarea name="rpContent"
-                          class="form-control input-box-sty" placeholder="설명을 입력하세요." id="floatingTextarea3"
-                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;"></textarea>
-                </div>
-                <!--                    <input type="text" name="orderContent" value="ab22bb"-->
-                <!--                           style="display: none">-->
-                <!--                    <input type="text" value="ab22bb" style="display: none">-->
+                <textarea class="form-control input-box-sty" placeholder="설명을 입력하세요."
+                          name="rpContent"
+                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;" required   oninput="setCustomValidity('요리 설명을 입력하세요')"></textarea>
+                    </div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-x-circle"
                      viewBox="0 0 16 16" type="button" onclick="removeDeP()">
@@ -400,6 +397,11 @@
             </div>
         </div>
     </div>
+
+
+
+
+
     <!--추가 버튼-->
     <div class="d-grid" style="margin-top: 10px; padding-left: 0px; padding-right: 30px;">
         <button class="btn btn-primary but-off-color" type="button" onclick="addDe()">추가</button>
@@ -432,8 +434,8 @@
                         <label class="input-file-button">
                             <img class="detailImg mx-auto"  src="/img/file-upload.svg" width="250px" height="200px"
                                  style="background-color: #D8F0FF70;; border-radius: 10px;  margin-top: 10px; border-radius: 30px;">
-                            <input type="file" name="recipePicture" class="isFile" style="display: none"
-                                   accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
+                            <input type="file"  name="recipePicture" class="isFile" style="display: none"
+                                   accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);" required oninvalid="this.setCustomValidity('4자리 이내의 숫자만 입력하세요')">
                         </label>
                     </div>
                     <!--사진2-->
@@ -441,8 +443,8 @@
                         <label class="input-file-button" style="margin-bottom: 10px;">
                             <img class="detailImg mx-auto"  src="/img/file-upload.svg" width="250px" height="200px"
                                  style="background-color: #D8F0FF70; border-radius: 10px;  margin-top: 10px; margin-right: 100px; border-radius: 30px;">
-                            <input type="file" name="recipePicture" class="isFile" style="display: none"
-                                   accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
+                            <input type="file"  name="recipePicture" class="isFile" style="display: none"
+                                   accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);" required oninvalid="this.setCustomValidity('두번째 완성사진을 업로드 해주세요')">
                         </label>
                     </div>
                 </div>
@@ -452,8 +454,8 @@
                         <label class="input-file-button">
                             <img class="detailImg mx-auto"  src="/img/file-upload.svg" width="250px" height="200px"
                                  style="background-color: #D8F0FF70; border-radius: 10px;  margin-top: 10px; border-radius: 30px;">
-                            <input type="file" name="recipePicture" class="isFile" style="display: none"
-                                   accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
+                            <input type="file"   name="recipePicture" class="isFile" style="display: none"
+                                   accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);" required oninvalid="this.setCustomValidity('세번째 완성사진을 업로드 해주세요')" >
                         </label>
                     </div>
                     <!--사진4-->
@@ -461,8 +463,8 @@
                         <label class="input-file-button">
                             <img class="detailImg mx-auto"  src="/img/file-upload.svg"  width="250px" height="200px"
                                  style="background-color: #D8F0FF70; border-radius: 10px; margin-top: 10px; border-radius: 30px;">
-                            <input type="file" name="recipePicture" class="isFile" style="display: none"
-                                   accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);">
+                            <input type="file"  name="recipePicture" class="isFile" style="display: none"
+                                   accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);"  required oninvalid="this.setCustomValidity('마지막 완성사진을 업로드 해주세요')">
                         </label>
                     </div>
                 </div>
@@ -490,7 +492,7 @@
 
 < <script th:inline="javascript">
 
-    var greenForm = document.querySelector('#REgreenC');
+    var greenForm = document.querySelector('#REgreen');
     var addgreen = document.querySelector('#addgreen');
 
     var countR = document.querySelectorAll('.REgreenC').length + 1;
@@ -507,7 +509,7 @@
         }
     }
 
-    function removeGrr() {
+    function removeGr() {
         let greenFormClass = document.querySelectorAll('.REgreenC');
         if (countR > 2) {
             greenFormClass[greenFormClass.length - 1].remove();
