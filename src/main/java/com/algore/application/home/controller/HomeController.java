@@ -24,27 +24,26 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public ModelAndView mainHome(ModelAndView mv,@RequestParam(defaultValue = "1") int page){
+    public ModelAndView mainHome(ModelAndView mv, int page) {
 
 
         int totaListCnt = homeService.allcnt();
 
-        Pagination pagination = new Pagination(totaListCnt,page);
+
+        Pagination pagination = new Pagination(totaListCnt, page);
 
         int startIndex = pagination.getStartIndex();
         int pageSiz = pagination.getPageSize();
 
 
+        List<MainViewDTO> mainViewDTOList = homeService.mainView(startIndex, pageSiz, page);
 
-        List<MainViewDTO> mainViewDTOList = homeService.mainView(startIndex,pageSiz,page);
 
-
-        mv.addObject("mainHomeList",mainViewDTOList);
-        mv.addObject("pagination",pagination);
+        mv.addObject("mainHomeList", mainViewDTOList);
+        mv.addObject("pagination", pagination);
         mv.setViewName("/home");
         return mv;
     }
-
 
 
 }
