@@ -203,7 +203,7 @@
         }
 
 
-        let memId = fetch("http://192.168.0.126:8080/findId?username="+username ,{ method: "GET"}
+        let memId = fetch("http://localhost:8080/findId?username="+username ,{ method: "GET"}
         ).then(res => res.text())
             .then(data => find(data))
             .catch(err => console.log(err));

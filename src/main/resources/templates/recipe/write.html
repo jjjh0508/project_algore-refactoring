@@ -84,6 +84,10 @@
 
         .ma-2-pla::placeholder {
             margin-top: 50px;
+
+        }
+        #noneElement >input:disabled {
+
         }
 
         /*미디어*/
@@ -370,44 +374,10 @@
 
         <span id="addplace"></span>
 
-        <!--복사할 엘리먼트-->
-
-        <div style="display: none">
-            <div id="REdetailD" class="REdetailD d-flex justify-content-center">
-                <div class="align-items-center" style="margin-top: 15px;">
-                    <label class="input-file-button float-start">
-                        <img class="detailImg" width="400px" height="270px"
-                             style="background-color: #D8F0FF70; border-radius: 10px; border-radius: 30px;"
-                             src="/img/file-upload.svg">
-
-                        <input type="file" name="rpFileName" class="isFile" style="display: none"
-                               accept="image/jpeg, image/png, image/jpg" onchange="imgView(this);" >
-
-                    </label>
-                </div>
-                <!--요리순서 설명-->
-                <div style="margin-top: 10px; margin-left: 35px; ">
-                <textarea class="form-control input-box-sty" placeholder="설명을 입력하세요."
-                          name="rpContent"
-                          style="width: 520px; height: 260px; resize: none; border-radius: 2em;"></textarea>
-                    </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-x-circle"
-                     viewBox="0 0 16 16" type="button" onclick="removeDeP()">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                    <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-
-
-
 
 
     <!--추가 버튼-->
-    <div class="d-grid" style="margin-top: 10px; padding-left: 0px; padding-right: 30px;">
+    <div class="d-grid" style="margin-top: 10px; padding-left: 0px; padding-right: 30px;" >
         <button class="btn btn-primary but-off-color" type="button" onclick="addDe()">추가</button>
     </div>
 
@@ -508,6 +478,7 @@
             console.log()
             addgreen.append(greenForm.cloneNode(true));
 
+
             countR++;
             console.log(countR)
         }
@@ -537,8 +508,33 @@
 
     function addDe() {
         if (count <= 10) {
-
-            addplace.appendChild(detailForm.cloneNode(true));
+addplace.innerHTML+="    <div id=\"REdetailD\" class=\"REdetailD d-flex justify-content-center\">\n" +
+    "                <div class=\"align-items-center\" style=\"margin-top: 15px;\">\n" +
+    "                    <label class=\"input-file-button float-start\">\n" +
+    "                        <img class=\"detailImg\" width=\"400px\" height=\"270px\"\n" +
+    "                             style=\"background-color: #D8F0FF70; border-radius: 10px; border-radius: 30px;\"\n" +
+    "                             src=\"/img/file-upload.svg\">\n" +
+    "\n" +
+    "                        <input type=\"file\" name=\"rpFileName\" class=\"isFile\" style=\"display: none\"\n" +
+    "                               accept=\"image/jpeg, image/png, image/jpg\" onchange=\"imgView(this);\" >\n" +
+    "\n" +
+    "                    </label>\n" +
+    "                </div>\n" +
+    "                <!--요리순서 설명-->\n" +
+    "                <div style=\"margin-top: 10px; margin-left: 35px; \">\n" +
+    "                <textarea class=\"form-control input-box-sty\" placeholder=\"설명을 입력하세요.\"\n" +
+    "                          name=\"rpContent\"\n" +
+    "                          style=\"width: 520px; height: 260px; resize: none; border-radius: 2em;\"></textarea>\n" +
+    "                    </div>\n" +
+    "                <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\"\n" +
+    "                     class=\"bi bi-x-circle\"\n" +
+    "                     viewBox=\"0 0 16 16\" type=\"button\" onclick=\"removeDeP()\">\n" +
+    "                    <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\n" +
+    "                    <path\n" +
+    "                            d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z\"/>\n" +
+    "                </svg>\n" +
+    "            </div>\n" +
+    "        </div>"
             count++;
             console.log(count)
 

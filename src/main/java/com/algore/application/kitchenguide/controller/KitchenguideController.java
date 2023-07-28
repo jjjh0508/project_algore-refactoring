@@ -230,7 +230,8 @@ public class KitchenguideController {
 //
             if (rpFile!=null && tpDetail!=null) {
                 for (int i = 0; i < rpFile.size(); i++) {
-                    if(rpFile.get(i)!=null && !tpDetail[i].isEmpty()) {
+                    System.out.println(tpDetail[i]);
+                    if(rpFile.get(i)!=null) {
                         System.out.println(tpDetail[i]);
                         MultipartFile photo = rpFile.get(i);
                         String originName = photo.getOriginalFilename();

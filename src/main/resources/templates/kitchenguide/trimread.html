@@ -156,7 +156,7 @@
         </th:block>
 
         <!--수정(관리자권한)"'/kitchenguide/delete/${trimDTO.trimNum}"-->
-        <div sec:authorize="hasRole('ADMIN')">
+        <div sec:authorize="hasAuthority('ADMIN')">
             <div class="d-flex justify-content-end new-margin" style="margin-top: 30px;">
                 <a th:href="'/kitchenguide/delete/'+${trimNum}" class="btn btn-primary but-off-color" role="button"
                    style=" margin-right: 15px; text-align: center; border-radius: 2em;"
