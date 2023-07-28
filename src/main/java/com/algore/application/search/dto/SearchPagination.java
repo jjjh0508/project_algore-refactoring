@@ -189,7 +189,7 @@ public class SearchPagination {
 
 
         /** 12. 다음 블럭(클릭 시, 다음 블럭 첫번째 페이지) **/
-        setNextBlock(page+);
+        setNextBlock(page+1);
 
 
         /* === 다음 블럭에 대한 validation ===*/
