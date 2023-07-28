@@ -5,6 +5,17 @@
 
 <th:block layout:fragment="content">
 
+
+    <script th:inline="javascript">
+
+        let message = [[${message}]];
+
+        if (message != null && message !== '') {
+            alert(message);
+        }
+
+
+    </script>
     <head>
         <meta charset="utf-8">
         <title>알고레</title>
@@ -102,7 +113,7 @@
                 <!--손질법-->
                 <div class="conbox con2">
                     <!--관리자 전용 버튼 : 이 부분은 자바로스크립트로해보기...-->
-                    <div sec:authorize="hasRole('ADMIN')">
+                    <div sec:authorize="hasAuthority('ADMIN')">
                         <div class="d-flex justify-content-end">
                             <a href="/kitchenguide/trimwrite">
                                 <button type="button" class="btn btn-outline-secondary"
@@ -121,7 +132,7 @@
                                 <a th:href="'/kitchenguide/trimread/'+${main.trimNum}">
                                     <!--사진-->
                                     <div>
-                                        <img th:src="'https://img.youtube.com/vi/' + ${main.trimVideoLink} + '/maxresdefault.jpg'"
+                                        <img th:src="'https://img.youtube.com/vi/' + ${main.trimVideoLink.substring(main.trimVideoLink.lastIndexOf('/')+1)} + '/maxresdefault.jpg'"
                                              style="height: 250px; width: 250px; padding: 10px 10px 10px 10px; background-color: #D8F0FF;"/>
                                     </div>
                                     <!--제목-->
@@ -138,7 +149,7 @@
                 <!--보관법-->
                 <div class="conbox con3">
                     <!--관리자 전용 버튼 : 이 부분은 자바로스크립트로해보기...-->
-                    <div sec:authorize="hasRole('ADMIN')">
+<!--                    <div sec:authorize="hasRole('ADMIN')">-->
                         <div class="d-flex justify-content-end">
                             <a href="/kitchenguide/trimwrite">
                                 <button type="button" class="btn btn-outline-secondary"
@@ -147,7 +158,7 @@
                                         작성하기</b></button>
                             </a>
                         </div>
-                    </div>
+<!--                    </div>-->
 
                     <!--게시글 영역-->
                     <div class="container text-center">
@@ -175,5 +186,10 @@
         </div>
     </main>
     </body>
+
+
+
 </th:block>
+
 </html>
+

@@ -10,10 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/common")
 public class SecurityController {
 
-    @GetMapping("/login")
-    public void login() {
-
-    }
+//    @GetMapping("/login")
+//    public void login() {
+//
+//    }
 
     @GetMapping("/test")
     public void index(){

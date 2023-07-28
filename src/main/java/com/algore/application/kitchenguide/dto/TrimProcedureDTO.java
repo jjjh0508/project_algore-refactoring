@@ -14,6 +14,12 @@ public class TrimProcedureDTO {
     public TrimProcedureDTO() {
     }
 
+    public TrimProcedureDTO(String tpFileName, String tpDetail, String tpPath) {
+        this.tpFileName = tpFileName;
+        this.tpDetail = tpDetail;
+        this.tpPath = tpPath;
+    }
+
     public TrimProcedureDTO(int tpStepNum, int trimNum, String tpFileName, String tpDetail, String tpPath, MultipartFile inputFile) {
         this.tpStepNum = tpStepNum;
         this.trimNum = trimNum;
@@ -21,6 +27,9 @@ public class TrimProcedureDTO {
         this.tpDetail = tpDetail;
         this.tpPath = tpPath;
         this.inputFile = inputFile;
+    }
+
+    public TrimProcedureDTO(TrimProcedureDTO trimProcedureDTO) {
     }
 
     public int getTpStepNum() {
@@ -39,7 +48,7 @@ public class TrimProcedureDTO {
         this.trimNum = trimNum;
     }
 
-    public String getTpFileName(String tpFileNames) {
+    public String getTpFileName() {
         return tpFileName;
     }
 

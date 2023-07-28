@@ -148,6 +148,7 @@ public class KitchenguideController {
         /* Service 로직에서 불러오기 */
         TrimDTO trimDTO = kitchenguideService.readTrim(trimNum);
         List<TrimProcedureDTO> procedureList = kitchenguideService.readPost(trimNum);
+        System.out.println(procedureList.get(0).getTpFileName());
 
         /* 데이터 전송("변수이름", "데이터 값");
          *  html 문서에서 타임리프 ${변수이름.dto(필드}이름}  ->  이렇게 사용하기 */
@@ -203,31 +204,45 @@ public class KitchenguideController {
     @PostMapping("/trimwrite") //사용자가 post 방식으로 /kitchenguide/trimwrite를 요청할 경우 실행
     @ResponseBody
     public ModelAndView insertTrim(ModelAndView mv, TrimDTO trimDTO, @RequestParam(value = "tpFileName", required = false)
-    List<MultipartFile> fileName, RedirectAttributes redirectAttributes) {
+    List<MultipartFile> rpFile, String[] tpDetail  , RedirectAttributes redirectAttributes) {
         System.out.println(trimDTO == null);
         System.out.println("1");
 //      손질법 등록 확인
         System.out.println("값 넘어오는지 확인하기...-=--------------------");
-        System.out.println("trimNum : " + trimDTO.getTrimNum());
+//        System.out.println("trimNum : " + trimDTO.getTrimNum());
         System.out.println("trimTitle : " + trimDTO.getTrimTitle());
         System.out.println("trimDetail : " + trimDTO.getTrimDetail());
         System.out.println("trimViews : " + trimDTO.getTrimViews());
         System.out.println("trimVideoLink : " + trimDTO.getTrimVideoLink());
+        System.out.println(tpDetail[0]);
         System.out.println(trimDTO); // 제목, 내용, 동영상URL ok, (번호 : 0 , 조회수 : 0, 상태 : null x)
 
 //         사진 등록 확인
-        System.out.println(fileName.get(0).getOriginalFilename());
+        System.out.println(rpFile.get(0).getOriginalFilename());
         try {
 //          현재 어플리케이션의 작업 리덱토리에서 정적 리소스 파일들을 저장할 경로를 지정
             String root = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\basic\\";
 //          파일 이름 중복을 피하기 위해 현재 시간 기준으로 파일 이름을 생성할 때 사용할 날짜 형식을 지정
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSSS");
 //          객체들을 저장할 리스트 생성
-//            List<TrimProcedureDTO> trimProcedureDTOS = new ArrayList<>();
-//          TrimDTO 객체에서 trimProcedureDTOList 필드를 가져와서 TrimProcedureDTOList 객체들을 저장
-//          List<TrimProcedureDTO> trimProcedureDTOList = trimDTO.getTrimProcedureDTOList();
-//          TrimDTO 객체에서 trimNum 필드를 가져와 손질 번호 저장
-            int trimNum = trimDTO.getTrimNum();
+            List<TrimProcedureDTO> trimProcedureDTOS = new ArrayList<>();
+//
+//
+            if (rpFile!=null && tpDetail!=null) {
+                for (int i = 0; i < rpFile.size(); i++) {
+                    if(rpFile.get(i)!=null && !tpDetail[i].isEmpty()) {
+                        System.out.println(tpDetail[i]);
+                        MultipartFile photo = rpFile.get(i);
+                        String originName = photo.getOriginalFilename();
+                        String newName = simpleDateFormat.format(new Date(System.currentTimeMillis())) + "." + originName.substring(originName.lastIndexOf(".") + 1);
+                        photo.transferTo(new File(root + "\\" + newName));
+                        trimProcedureDTOS.add(new TrimProcedureDTO(newName, tpDetail[i], "/upload/basic/"));
+                    }
+                }
+            }
+
+            trimDTO.setTrimProcedureDTOList(trimProcedureDTOS);
+
 
             /* 사진 로직
              *  MultipartFile : 파일 업로드 시 클라이언트로부터 전송된 파일 데이터를 처리하는 인터페이스
@@ -262,16 +277,18 @@ public class KitchenguideController {
              *  view에 전달할 값 설정 (데이터 보낼 때)
              *  mv.addObject("변수 이름", "데이터 값");
              * */
-            mv.addObject("message", "등록이 완료되었습니다.");
+            redirectAttributes.addFlashAttribute("message","등록 성공");
+            mv.setViewName("redirect:/kitchenguide/mainview");
             /* 응답할 view 이름 설정
              *  mv.setViewName("뷰의 경로");*/
-            mv.setViewName("redirect:kitchenguide/trimread");
+
+
         } else {
             /* 손질법 등록 실패
              * result가 0보다 크지 않을 때
              * */
-            mv.addObject("message", "등록에 실패하였습니다.");
-            mv.setViewName("redirect:kitchenguide/trimread");
+            redirectAttributes.addFlashAttribute("message","등록 실패");
+            mv.setViewName("redirect:/kitchenguide/mainview");
         }
         return mv;
     }
