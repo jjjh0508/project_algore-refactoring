@@ -34,6 +34,9 @@ spring:
   web:
     resources:
       static-locations: classpath:/static/upload/
+  profiles:
+    active: local
+    include: email
 
 image:
   image-dir: src/main/resources
@@ -48,6 +51,7 @@ mybatis:
 logging:
   level:
     root: info
+
 
 open-api:
   key: 2b83ff411132fa365cdbe1390a21aef11bcefffb6fabd2ace019c208dd8db856
