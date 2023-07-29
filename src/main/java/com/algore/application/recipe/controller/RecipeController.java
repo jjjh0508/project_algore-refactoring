@@ -65,7 +65,7 @@ public class RecipeController {
         return mv;
     }
 
-    @ResponseBody
+
     @PostMapping("/registform")
     public ModelAndView writeReci(ModelAndView model, Authentication authentication, RecipeWriteDTO recipeWriteDTO, HttpServletRequest request,
                                   @RequestParam(value = "rpFileName", required = false) List<MultipartFile> rpFile,
@@ -162,13 +162,13 @@ public class RecipeController {
 
                 }
             }
-            System.out.println("재료 갯수 테스트 "+ingNum.length);
+            System.out.println("재료 갯수 테스트 " + ingNum.length);
             // 재료
             for (int i = 0; i < ingNum.length; i++) {
-                    recipeIngredientDTOS.add(new RegistIngredientDTO(ingNum[i], Integer.parseInt(weigh[i]), riUnitNum[i]));
-                    System.out.println(ingNum[i] + "이름");
-                    System.out.println(weigh[i] + "용량");
-                    System.out.println(riUnitNum[i] + "단위");
+                recipeIngredientDTOS.add(new RegistIngredientDTO(ingNum[i], Integer.parseInt(weigh[i]), riUnitNum[i]));
+                System.out.println(ingNum[i] + "이름");
+                System.out.println(weigh[i] + "용량");
+                System.out.println(riUnitNum[i] + "단위");
             }
 
             for (SelectProcedure selectProcedure : selectProcedures) {
@@ -213,7 +213,7 @@ public class RecipeController {
         return model;
     }
 
-    @ResponseBody
+
     @GetMapping("/modify")
     public ModelAndView modifyForm(ModelAndView mv, Authentication authentication,
                                    @RequestParam("recipe") int recipe) {
