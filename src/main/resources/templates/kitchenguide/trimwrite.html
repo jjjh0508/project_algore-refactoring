@@ -166,8 +166,7 @@
         /*손질순서*/
         var detailForm = document.querySelector('#REdetailD');
         var addplace = document.querySelector('#addplace');
-        var count = 2;
-
+        var count = document.querySelectorAll('.REdetailD').length + 1;
         function addDe() {
             if (count <= 10) {
                 addplace.innerHTML+=" <div id=\"REdetailD\" class=\"REdetailD d-flex justify-content-center\">\n" +

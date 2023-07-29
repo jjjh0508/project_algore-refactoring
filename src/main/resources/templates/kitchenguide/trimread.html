@@ -4,7 +4,16 @@
       layout:decorate="~{common/layouts/layout}">
 
 <th:block layout:fragment="content">
+    <script th:inline="javascript">
 
+        let message = [[${message}]];
+
+        if (message != null && message !== '') {
+            alert(message);
+        }
+
+
+    </script>
     <head>
         <meta charset="UTF-8">
         <title>Title</title>

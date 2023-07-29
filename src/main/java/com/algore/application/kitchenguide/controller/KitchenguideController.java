@@ -3,6 +3,7 @@ package com.algore.application.kitchenguide.controller;
 import com.algore.application.kitchenguide.dto.TrimDTO;
 import com.algore.application.kitchenguide.dto.TrimProcedureDTO;
 import com.algore.application.kitchenguide.service.KitchenguideService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -63,8 +65,10 @@ public class KitchenguideController {
 
         /* 데이터 전송("변수이름", "데이터 값");
          *  html 문서에서 타임리프 ${변수이름.dto(필드}이름}  ->  이렇게 사용하기 */
+        trimDTO.setTrimNum(trimNum);
+        trimDTO.setTrimProcedureDTOList(procedureList);
         mv.addObject("trimDTO", trimDTO); //손질법 제목, 내용, 동영상URl
-        mv.addObject("procedureList", procedureList); //손질법 순서
+
 
         /*기존 값 읽어오는지 확인하기...*/
         System.out.println("trimupdate Controller : " + trimDTO);
@@ -75,56 +79,62 @@ public class KitchenguideController {
     }
 
     @PostMapping("/trimupdate/{trimNum}") //손질법 게시글 수정(관리자 권한) - 수정 시 작동하는 컨트롤러
-    public ModelAndView trimupdatepost(ModelAndView mv, TrimDTO trimDTO, List<TrimProcedureDTO> trimProcedureDTO,
+    public ModelAndView trimupdatepost(ModelAndView mv, TrimDTO trimDTO,
                                        HttpServletRequest request/*요청*/, HttpServletResponse response/*응답*/,
-                                       @RequestParam("trimTitle") String trimTitle/*손질제목*/,
-                                       @RequestParam("trimDetail") String trimDetail/*손질내용*/,
-                                       @RequestParam("trimVideoLink") String trimVideoLink/*동영상링크*/,
-                                       @RequestParam("tpDetail") String tpDetail /*손질내용 리스트에 담기*/) {
-
-//        ,
-//        @RequestParam("tpFileName") List<MultipartFile> fileOne/*파일 저장해주기*/
-        System.out.println("post/trimupdate controller 실행됨--------------------------------");
-
-        /*TrimDTO*/
-        trimDTO.setTrimTitle(trimTitle); //손질 제목
-        trimDTO.setTrimDetail(trimDetail); //손질 내용
-        trimDTO.setTrimVideoLink(trimVideoLink); //동영상링크
-
-        /*값 제대로 받아오는지 확인*/
-        System.out.println("trimTitle : " + trimTitle);
-        System.out.println("trimDetail : " + trimDetail);
-        System.out.println("trimVideoLink : " + trimVideoLink);
-
-        /*매퍼 연결*/
-        int result = kitchenguideService.trimUpdatePost(trimDTO);
-
-        System.out.println("손질순서 값 수정해보기 ------");
-
-        /*손질순서 리스트에 담기*/
-//        trimProcedureDTO.set(tpDetail);
+                                       @RequestParam(value = "tpFileName") List<MultipartFile> multipartFiles,  // 새로 받아올 사진
+                                       @RequestParam(value = "tpDetail") String[] tpDetail // 원래 있던 값+  새로 받는 값
+                                       , RedirectAttributes redirectAttributes
 
 
-//        String root = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\basic\\";
-//        /*파일 이름 중복을 방지하기 위한 초단위 파일명*/
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSSS");
-//        MultipartFile trimFile = trimProcedureDTO.getInputFile();
-//        String trimFileName = trimFile.getOriginalFilename();
-//
-//        if (!trimFile.isEmpty()) {
-//            File trimTPFile = new File(root + trimProcedureDTO.getTpFileName());
-//            System.out.println(trimTPFile);
-//            if (trimTPFile.exists()) {
-//                trimTPFile.delete();
-//            }
-//
-//        }
+
+                                      ) {
+
+        try {
 
 
-        /*파일 이름만 담아서 dto로 보내주기....*/
+            System.out.println("post/trimupdate controller 실행됨--------------------------------");
+            String root = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\basic\\";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSSS");
+            List<TrimProcedureDTO> trimProcedureDTOS = trimDTO.getTrimProcedureDTOList();
+            List<TrimProcedureDTO> modifyTrimProcedureDTOs = new ArrayList<>();
+            for (int i = 0; i < multipartFiles.size(); i++) {
+                if (multipartFiles.get(i).isEmpty()) {
+                    modifyTrimProcedureDTOs.add(new TrimProcedureDTO(trimDTO.getTrimNum(), trimProcedureDTOS.get(i).getTpFileName(), tpDetail[i], trimProcedureDTOS.get(i).getTpPath()));
+                } else {
+                    if (i < trimProcedureDTOS.size()) {
+                        File file = new File(root + "\\" + trimProcedureDTOS.get(i).getTpFileName()); // 이미 저장한 파일이름 가져오기
+
+                        if (file.exists()) { // 파일 있는지 확인
+                            file.delete(); // 파일 이 있으면 삭제하기
+                        }
+                    }
 
 
-        mv.setViewName("/kitchenguide/trimread");
+                    String orginFileName = multipartFiles.get(i).getOriginalFilename();
+
+                    String newFileName = simpleDateFormat.format(new Date(System.currentTimeMillis())) + orginFileName.substring(orginFileName.lastIndexOf(".") + 1);
+                    multipartFiles.get(i).transferTo(new File(root + "\\" + newFileName));
+                    modifyTrimProcedureDTOs.add(new TrimProcedureDTO(trimDTO.getTrimNum(), newFileName, tpDetail[i], "/upload/basic/"));
+                }
+            }
+
+            trimDTO.setTrimProcedureDTOList(modifyTrimProcedureDTOs);
+            int result = kitchenguideService.trimUpdatePost(trimDTO);
+            if (result>0){
+                redirectAttributes.addFlashAttribute("message","수정 성공했습니다.");
+                mv.setViewName("redirect:/kitchenguide/trimread/"+trimDTO.getTrimNum());
+
+            }else {
+                redirectAttributes.addFlashAttribute("message","수정 실패했습니다..");
+                mv.setViewName("redirect:/kitchenguide/trimread/"+trimDTO.getTrimNum());
+            }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return mv;
     }
 

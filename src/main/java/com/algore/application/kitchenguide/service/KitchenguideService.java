@@ -67,7 +67,18 @@ public class KitchenguideService {
     }
 
     public int trimUpdatePost(TrimDTO trimDTO) {
-        int result = mapper.trimPostUpdate(trimDTO);
+        int result=0;
+        int resultTrim = mapper.trimPostUpdate(trimDTO);
+        if (resultTrim>0){
+            int resultPro = mapper.deleteProcedure(trimDTO.getTrimNum());
+            if (resultPro>0){
+                int resultProinsert = mapper.updeteProduce(trimDTO.getTrimProcedureDTOList());
+
+                if(resultTrim>0 && resultPro >0 && resultTrim >0){
+                    result  =1;
+                }
+            }
+        }
         return result;
     }
 }

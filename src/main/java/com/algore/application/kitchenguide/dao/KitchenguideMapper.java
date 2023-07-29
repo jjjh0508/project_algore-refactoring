@@ -27,4 +27,7 @@ public interface KitchenguideMapper {
     int trimPostUpdate(TrimDTO trimDTO); //게시글 수정
 
 
+    int deleteProcedure(int trimNum);
+
+    int updeteProduce(List<TrimProcedureDTO> trimProcedureDTOList);
 }
