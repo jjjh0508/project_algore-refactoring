@@ -25,7 +25,7 @@
             A.A_STATUS
         FROM QNA Q
                  JOIN QUESTION U ON (Q.Q_NUMBER = U.Q_NUMBER)
-                 JOIN ANSWER A ON (A.Q_NUMBER= Q.Q_NUMBER)
+                left JOIN ANSWER A ON (A.Q_NUMBER= Q.Q_NUMBER)
                  JOIN MEMBER M on (Q.MEM_NUM = M.MEM_NUM)
     </select>
     
@@ -41,8 +41,27 @@
     WHERE U.Q_NUMBER = #{ qNumber }
      </select>
 
+    <insert id="registQna" parameterType="com.algore.application.qna.dto.QuestionInsertDTO">
+        INSERT INTO QNA
+        (Q_NUMBER , MEM_NUM)
+        VALUES (
+                   SEQ_Q_NUMBER.NEXTVAL,#{mumNum}
+               )
+    </insert>
 
+    <insert id="registQue"  parameterType="com.algore.application.qna.dto.QuestionInsertDTO">
+        INSERT INTO QUESTION
+        (Q_NUMBER, QUE_TITLE, QUE_CONTENT , QUE_DATE )
+        VALUES (
+                   SEQ_Q_NUMBER.CURRVAL , #{queTitle} ,#{queContent} ,SYSDATE
+          )
+    </insert>
 
+    <insert id="registQueAnw">
+        INSERT INTO ANSWER
+            (Q_NUMBER , A_STATUS)
+        VALUES (SEQ_Q_NUMBER.CURRVAL ,'N')
+    </insert>
 
 <!--    <insert id="insertCreate" parameterType="com.algore.application.qna.dto.QuestionDTO">-->
 <!--        INSERT INTO(Q_NUMBER, QUE_TITLE, QUE_CONTENT, QUE_DATE, QUE_MODI_STATUS, QUE_MODI_DATE)-->

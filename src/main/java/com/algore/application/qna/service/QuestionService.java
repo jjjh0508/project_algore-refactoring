@@ -2,6 +2,7 @@ package com.algore.application.qna.service;
 
 import com.algore.application.qna.dao.QuestionMapper;
 import com.algore.application.qna.dto.QuestionDTO;
+import com.algore.application.qna.dto.QuestionInsertDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,8 +33,17 @@ public class QuestionService {
     }
 
 
+    public int regist(QuestionInsertDTO questionInsertDTO) {
+        //qna 등록
+        int result = 0;
+        int resultqNA = detailMapper.registQna(questionInsertDTO);
+        //질문등록
+        if(resultqNA>0){
+            result = detailMapper.registQue(questionInsertDTO);
+            detailMapper.registQueAnw();
+        }
 
 
-
-
+        return result;
+    }
 }

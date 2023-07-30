@@ -1,13 +1,13 @@
 package com.algore.application.qna.controller;
 
+import com.algore.application.auth.AuthUserDTO;
 import com.algore.application.qna.dto.QuestionDTO;
+import com.algore.application.qna.dto.QuestionInsertDTO;
 import com.algore.application.qna.service.QuestionService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +28,7 @@ public class QnAController {
 
     @GetMapping("/main")
     public ModelAndView main(ModelAndView mv) {
+        System.out.println("dd");
         List<QuestionDTO> lists = detail.questionAll();
         for (QuestionDTO questionDTO: lists) {
             System.out.println("메인입니다.: " + questionDTO);
@@ -65,6 +66,21 @@ public class QnAController {
     //유저 질문
     @GetMapping("userwritequestion")
     public void userwritequestion() {
+    }
+    @PostMapping("userwritequestion")
+    public ModelAndView userwritequestionFrom(ModelAndView modelAndView , QuestionInsertDTO questionInsertDTO, Authentication authentication) {
+        AuthUserDTO user = (AuthUserDTO) authentication.getPrincipal();
+        questionInsertDTO.setMumNum(user.getMemNum());
+        System.out.println(questionInsertDTO);
+        int result = detail.regist(questionInsertDTO);
+        if(result>0){
+            System.out.println("성공");
+            modelAndView.setViewName("redirect:/qna/main");
+        }else {
+            System.out.println("실패");
+            modelAndView.setViewName("Redirect:/qna/main");
+        }
+        return modelAndView;
     }
 
     //유저 상세글 수정

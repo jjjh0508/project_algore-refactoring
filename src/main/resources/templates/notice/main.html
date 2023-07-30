@@ -96,6 +96,7 @@
   <main class="write01"
         style="width: 1100px; margin: 0 auto; padding-left:10px; padding-right: 10px; margin-bottom: 100px;">
     <!--관리 전용 버튼-->
+     <div sec:authorize="hasAuthority('ADMIN')">
     <div class="d-flex justify-content-end">
       <a href="#">
         <button type="button" class="btn btn-outline-secondary"
@@ -104,6 +105,7 @@
         </button>
       </a>
     </div>
+  </div>
     <!--게시글 영역-->
     <div class="table-container" style="margin-top: 50px;">
       <table class="table">
