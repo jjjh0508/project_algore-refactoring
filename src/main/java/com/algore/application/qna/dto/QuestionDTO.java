@@ -8,8 +8,9 @@ public class QuestionDTO {
     private String status;
     private String ModiDate;
     private String nickname;
+    private String id;
 
-    public QuestionDTO(int qNumber, String qTitle, String qContent, String qDate, String status, String modiDate, String nickname) {
+    public QuestionDTO(int qNumber, String qTitle, String qContent, String qDate, String status, String modiDate, String nickname, String id) {
         this.qNumber = qNumber;
         this.qTitle = qTitle;
         this.qContent = qContent;
@@ -17,11 +18,19 @@ public class QuestionDTO {
         this.status = status;
         ModiDate = modiDate;
         this.nickname = nickname;
+        this.id = id;
     }
 
     public QuestionDTO() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getStatus() {
         return status;
@@ -83,7 +92,6 @@ public class QuestionDTO {
     }
 
 
-
     @Override
     public String toString() {
         return "QuestionDTO{" +
@@ -94,6 +102,7 @@ public class QuestionDTO {
                 ", status='" + status + '\'' +
                 ", ModiDate='" + ModiDate + '\'' +
                 ", nickname='" + nickname + '\'' +
+                ", id='" + id + '\'' +
                 '}';
     }
 }

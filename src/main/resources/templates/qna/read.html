@@ -167,21 +167,22 @@
                     이전
                 </button>
             </div>
-
+            <th:block th:if="${#authentication.name}==${detail.id}">
             <div style="margin-left: 30px;">
                 <button type="button" class="btn btn-outline-primary but-off-color"
                         onclick="return confirm('게시글을 수정 하시겠습니까?')">
                     수정하기
                 </button>
             </div>
-<!--            <div sec:authorize="hasAuthority('ADMIN')">-->
+            </th:block>
+            <div sec:authorize="hasAuthority('ADMIN')">
             <div style="margin-left: 30px;">
                 <a role="button" th:href="@{/qna/adminwriteanswer(qNumber=${detail.qNumber})}" class="btn btn-outline-primary but-off-color"
                         onclick="return confirm('게시글 답변을 하시겠습니까?')">
                     답변하기
                 </a>
             </div>
-<!--            </div>-->
+            </div>
         </div>
     </main>
 

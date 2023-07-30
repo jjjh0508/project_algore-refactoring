@@ -11,6 +11,7 @@
         <result property="qContent" column="QUE_CONTENT"/>
         <result property="qDate" column="QUE_DATE"/>
         <result property="status" column="A_STATUS"/>
+        <result property="id" column="ID"/>
 
     </resultMap>
 
@@ -34,7 +35,8 @@
         U.Q_NUMBER,
         M.NICKNAME ,
         U.QUE_TITLE,
-        U.QUE_CONTENT
+        U.QUE_CONTENT,
+        M.ID
     FROM QNA Q
         JOIN QUESTION U ON (Q.Q_NUMBER = U.Q_NUMBER)
         JOIN MEMBER M on (Q.MEM_NUM = M.MEM_NUM)
