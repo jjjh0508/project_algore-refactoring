@@ -27,7 +27,8 @@ public class EmailController {
 
         String authCode = emailService.sendEmail(emailAuthDTO.getEmail());
 
-
+        System.out.println(authCode);
         return authCode;
+
     }
 }

@@ -4,10 +4,9 @@ import com.algore.application.user.dto.UserMemberDTO;
 import com.algore.application.user.service.JoinService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -44,21 +43,29 @@ public class JoinController {
     @GetMapping("login")
     public void login(){}
 
-    @PostMapping(value = "/regist")
-    public ModelAndView registMember(ModelAndView model, UserMemberDTO insertUserMemberDTO) {
-        System.out.println(insertUserMemberDTO);
+    @PostMapping("/regist")
+    public ModelAndView registMember(ModelAndView model, UserMemberDTO userMemberDTO) {
+        System.out.println(userMemberDTO.getEmail());
+        System.out.println(userMemberDTO);
 
-        int result = joinService.registUser(insertUserMemberDTO);
+        int result = joinService.registUser(userMemberDTO);
         
         if(result>0){
             System.out.println("성공");
+            model.addObject("message","가입에 성공했습니다");
             model.setViewName("user/login");
         }else {
-            System.out.println("실패");
-        }
 
+            System.out.println("실패");
+            model.addObject("message","가입에 실패했습니다");
+            model.setViewName("user/login");
+        }
         return model;
     }
+    
+    
+    
+    
 //    @GetMapping("login")
 //    public ModelAndView layout( ModelAndView mv){
 //        mv.setViewName("user/login");

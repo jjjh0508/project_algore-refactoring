@@ -85,7 +85,7 @@
       style="width: 1000px; margin: 0 auto; padding-left:10px; padding-right: 10px; margin-bottom: 100px; margin-top: 120px;">
     <div class="text-center">
         <div class="form-signin mx-auto" style="width: 400px;">
-            <form th:action="@{/user/regist}"  method="post">
+            <form action="/user/regist" method="post" enctype="application/x-www-form-urlencoded"accept-charset="UTF-8">
                 <!--회원가입-->
                 <h1 class="h1 mb-5 fw-bold" style="color: #208BCE;">회원가입</h1>
                 <!--이름 입력 영역-->
@@ -119,7 +119,7 @@
                 </div>
                 <!--(자바스크립트로) 아이디 중복 확인 알림...-->
                 <div class="d-flex justify-content-start" id="CheckId" style="margin-top: 5px;">
-                    <label for="alim" style="float: left;"></label>
+                    <label style="float: left;"></label>
                 </div>
                 <!--닉네임 입력 영역-->
                 <div class="d-flex justify-content-start" style="margin-top: 15px;">
@@ -129,7 +129,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control"  name="nickName"
                                        placeholder="id" style="width: 260px;">
-                                <label for="nickName">닉네임</label>
+                                <label >닉네임</label>
                             </div>
                         </td>
 
@@ -154,23 +154,48 @@
                             <!--이메일 입력-->
                             <div class="form-floating">
                                 <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="id" style="width: 260px;" required>
-                                <label for="email">이메일</label>
+                                       placeholder="id" style="width: 260px;" >
+                                <label >이메일</label>
                             </div>
                         </td>
                         <td>
                             <!--이메일 인증-->
                             <div class="checkId">
-                                <button type="submit" class="btn btn-info but-off-color"
-                                        style="width: 100px; height: 55px;">인증
+                                <button type="button" id="emailCheck" class="btn btn-info but-off-color"
+                                        style="width: 150px; height: 55px;">인증코드 전송
                                 </button>
                             </div>
                         </td>
+
+                    </table>
+                </div>
+                <div class="d-flex justify-content-start" id="clickEmail" style="margin-top: 5px;">
+                    <label style="float: left;"></label>
+                </div>
+                <div class="d-flex justify-content-start" style="margin-top: 15px;">
+                    <table>
+                        <td>
+<!--                            코드 입력-->
+                            <div class="form-floating">
+                                <input type="text"  class="form-control" id="code" name="code"
+                                       placeholder="id" style="width: 260px;" required>
+                                <label for="">인증코드</label>
+                            </div>
+                        </td>
+                        <td>
+                            <!--코드 인증-->
+                            <div class="checkId">
+                                <button type="button"  disabled id="codeCheck" class="btn btn-info but-off-color"
+                                        style="width: 150px; height: 55px;">인증확인
+                                </button>
+                            </div>
+                        </td>
+
                     </table>
                 </div>
                 <!--(자바스크립트로) 닉네임 중복 확인 알림...-->
                 <div class="d-flex justify-content-start" style="margin-top: 5px;">
-                    <label for="alim" style="float: left;">*해당 이메일로 인증코드를 발송하였습니다.</label>
+<!--                    <label for="alim" style="float: left;">*해당 이메일로 인증코드를 발송하였습니다.</label>-->
                 </div>
                 <!--버튼-->
                 <div class="d-flex justify-content-center" style="margin-top: 50px;">
@@ -178,7 +203,7 @@
                     <button class="btn btn-lg btn-primary but-off-color" type="button"
                             style="margin-right: 20px;"><b>이전</b></button>
                     <!--회원가입 버튼-->
-                    <button type="submit" disabled  id="joinbtn" class="btn btn-lg btn-primary but-off-color joinbtn" role="button">
+                    <button type="submit"  disabled id="joinbtn"  class="btn btn-lg btn-primary but-off-color joinbtn">
                         <b>회원가입</b>
                     </button>
                     <!--                    <button class="btn btn-lg btn-primary but-off-color" type="submit"><b>회원가입</b></button>-->
@@ -190,10 +215,22 @@
 </body>
 </html>
 <script th:inline="javascript">
+    let message = [[${message}]];
+
+    if (message != null && message !== '') {
+        alert(message);
+    }
+
+
+
 
     let button = document.querySelector("#joinbtn");
+    let chbutton = document.querySelector("#codeCheck");
     let findId = document.getElementById("CheckId");
+    let findCode = document.getElementById("clickEmail");
+    let emailCode = $("#CheckCode").val();
     let joindate =0;
+    let emailCodeVar = 0;
     document.getElementById('butWithFun').addEventListener('click',function(){
         var username = $("#username").val();
         if(username.length == 0 ){
@@ -202,16 +239,12 @@
             return
         }
 
-
         let memId = fetch("http://localhost:8080/findId?username="+username ,{ method: "GET"}
         ).then(res => res.text())
             .then(data => find(data))
             .catch(err => console.log(err));
-
-
-
-
     })
+
 
 
     function find(data){
@@ -220,7 +253,6 @@
         console.log(joindate)
         if (data==1){
             findId.innerHTML= "<div>"+"사용 할 수 있는 아이디 입니다."+"</div>";
-            button.disabled = false
         }else {
             findId.innerHTML= "<div>"+"사용 할 수 없는 아이디 입니다."+"</div>";
             button.disabled = true;
@@ -230,6 +262,51 @@
     }
 
 
+    document.getElementById('emailCheck').addEventListener('click',function(){
 
+        var  email = $("#email").val();
+        if(email.length==0){
+            alert('이메일을 입력해주세요');
+            return;
+        }
+        findCode.innerHTML ="<div>"+"인증코드를 발송했습니다."+"</div>";
+        chbutton.disabled=false;
+        let emailcheck = fetch("http://localhost:8080/mailConfirm",{headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'},
+            method: "POST", body:JSON.stringify({email : email})
+        }).then(res => res.text())
+            .then(code => checkEmailCode(code))
+            .catch(err => console.log(err));
+
+        emailCodeVar= code;
+    })
+
+    function checkEmailCode(code){
+        emailCodeVar = code;
+        console.log(code);
+    }
+
+    document.getElementById('codeCheck').addEventListener('click',function(){
+        var code = $("#code").val();
+        console.log(code);
+        console.log(emailCodeVar);
+        if(code===emailCodeVar){
+            let emCode = document.querySelector("#code");
+            // let emaliText = document.querySelector("#emails");
+
+            alert("인증 성공")
+            emCode.disabled=true;
+            // emaliText.disabled=true;
+            if (joindate==1){
+
+                button.disabled = false;
+            }
+
+
+        }
+
+
+    })
 
 </script>

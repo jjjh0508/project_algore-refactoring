@@ -41,7 +41,7 @@ public class SecuriyConfig {
                 // (/list) -> 이와 같은 것을 리소르라고 한다.
                 // 아래의 mvcMatchers는 요청 주소 식별에서 (/list/)와 같이 모호한 요청도 식별을 해준다.
                 // 추가됨
-                .mvcMatchers("/*","/user/login","/common/loginfail","common/test","/kitchenguide/mainview","user/join","/recipe/view")
+                .mvcMatchers("/*","/user/login","/common/loginfail","common/test","/kitchenguide/mainview","user/join","/recipe/view","/user/regist")
                 // 해당 설정은 위에 정의된 리소스 요청에 모든 권한의 사용자를 허용해준다는 것이다.
                 .permitAll() //이와 반대인 denyAll()도 있으며 이것은 모두 제안한다.
                 // .rememberMe() : 로그인된 사용자만 접근을 허용해준다.
