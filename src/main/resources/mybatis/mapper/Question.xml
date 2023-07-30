@@ -63,6 +63,26 @@
         VALUES (SEQ_Q_NUMBER.CURRVAL ,'N')
     </insert>
 
+
+    <update id="answerInset" parameterType="com.algore.application.qna.dto.AnswerDTO">
+        UPDATE ANSWER
+        SET A_CONTENT = #{acontent} , A_DATE= SYSDATE , A_STATUS='Y'
+        WHERE Q_NUMBER= #{qNumber}
+
+    </update>
+
+    <resultMap id="reedAnswerMap" type="com.algore.application.qna.dto.AnswerDTO">
+        <result property="qNumber" column="Q_NUMBER"/>
+        <result property="acontent" column="A_CONTENT"/>
+    </resultMap>
+
+    <select id="reedAnswer">
+        SELECT
+            A_CONTENT
+            FROM ANSWER
+        WHERE  Q_NUMBER =#{qNumber}
+
+    </select>
 <!--    <insert id="insertCreate" parameterType="com.algore.application.qna.dto.QuestionDTO">-->
 <!--        INSERT INTO(Q_NUMBER, QUE_TITLE, QUE_CONTENT, QUE_DATE, QUE_MODI_STATUS, QUE_MODI_DATE)-->
 <!--            VALUES(-->

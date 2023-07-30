@@ -1,6 +1,7 @@
 package com.algore.application.qna.service;
 
 import com.algore.application.qna.dao.QuestionMapper;
+import com.algore.application.qna.dto.AnswerDTO;
 import com.algore.application.qna.dto.QuestionDTO;
 import com.algore.application.qna.dto.QuestionInsertDTO;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,15 @@ public class QuestionService {
 
 
         return result;
+    }
+
+    public int answerInset(AnswerDTO answerDTO) {
+        int result = detailMapper.answerInset(answerDTO);
+        return result;
+    }
+
+    public AnswerDTO reedAnswer(int qNumber) {
+        AnswerDTO answerDTO = detailMapper.reedAnswer(qNumber);
+        return answerDTO;
     }
 }

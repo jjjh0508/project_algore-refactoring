@@ -103,7 +103,8 @@
                 <div class="row row-cols-auto" style="margin-top: 40px;">
                     <!--제목-->
                     <div class="col-1-sm-3 p-2"
-                         style="width: 10%; border-radius: 2em; font-size: 20px; background: #D6F2FF;" label style="color: #085A84; height: 50px; padding-top: 10px; font-size: 18px;">닉네임</label>
+                         style="width: 10%; border-radius: 2em; font-size: 20px; background: #D6F2FF;" >
+                         <label style="color: #085A84; height: 50px; padding-top: 10px; font-size: 18px;">닉네임</label>
                     </div>
 
                     <!--제목 입력-->
@@ -142,27 +143,45 @@
                             <span th:text="${detail.qContent}"></span>
                         </p>
                     </div>
+                    <th:block th:if="${answerDTO!=null}">
+                        <div class="col-1-sm-3 p-4 "
+                             style="width: 10%; height: 200px; border-radius: 1em; font-size: 20px; background: #D6F2FF; color: #085A84; font-size: 18px;">
+                            답변<br>내용
+                        </div>
+                        <div class="col" style="width: 90%; text-align: left;" id="#">
+                            <p class="form-control pla-col input-box-sty" style=" border-radius: 2em; height: 200px; padding: 15px 20px 10px 20px;">
+                                <span th:text="${answerDTO.acontent}"></span>
+                            </p>
+                        </div>
+                    </th:block>
                 </div>
             </div>
         </div>
+
+
+
+
         <div class="d-flex justify-content-end" style="margin-top: 50px; margin-right: 40px;">
             <div>
                 <button type="button" class="btn btn-outline-primary but-off-color" onclick="home()">
                     이전
                 </button>
             </div>
-            <div style="margin-left: 30px;">
-                <button type="button" class="btn btn-outline-primary but-off-color"
-                        onclick="return confirm('게시글 답변을 하시겠습니까?')">
-                    답변하기
-                </button>
-            </div>
+
             <div style="margin-left: 30px;">
                 <button type="button" class="btn btn-outline-primary but-off-color"
                         onclick="return confirm('게시글을 수정 하시겠습니까?')">
                     수정하기
                 </button>
             </div>
+<!--            <div sec:authorize="hasAuthority('ADMIN')">-->
+            <div style="margin-left: 30px;">
+                <a role="button" th:href="@{/qna/adminwriteanswer(qNumber=${detail.qNumber})}" class="btn btn-outline-primary but-off-color"
+                        onclick="return confirm('게시글 답변을 하시겠습니까?')">
+                    답변하기
+                </a>
+            </div>
+<!--            </div>-->
         </div>
     </main>
 
@@ -170,6 +189,13 @@
         //이전 버튼 클릭 시 main 화면으로 이동
         function home() {
             window.location.assign("http://localhost:8081/qna/main");
+        }
+
+
+        let message = [[${message}]];
+
+        if (message != null && message !== '') {
+            alert(message);
         }
     </script>
     </body>

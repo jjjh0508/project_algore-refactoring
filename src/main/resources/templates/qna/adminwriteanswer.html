@@ -114,7 +114,9 @@
     <!--52_1_QnA_사용자_게시글작성-->
     <main class="write01"
           style="width: 1100px; margin: 0 auto; padding-left:10px; padding-right: 10px; margin-bottom: 100px;">
+        <form action="/qna/answerinsert" method="post">
         <div class="container-fluid modifys d-flex justify-content-start" style="margin-top: 50px;">
+            <input  type="hidden"  th:field="${detailQna.qNumber}" >
             <div class="container text-center">
                 <!--제목 영역-->
                 <div class="row row-cols-auto" style="margin-top: 40px;">
@@ -126,8 +128,8 @@
                     </div>
                     <!--제목 입력-->
                     <div class="col" style="width: 90%; text-align: left;">
-                        <!--th:type="${recipevlew.recipeIntro}"--><p class="form-control pla-col input-box-sty"
-                           style=" border-radius: 2em; height: 50px; padding: 12px 20px 10px 20px;">dsfadfaf</p>
+                        <p th:text="${detailQna.nickname}" class="form-control pla-col input-box-sty"
+                           style=" border-radius: 2em; height: 50px; padding: 12px 20px 10px 20px;"></p>
                     </div>
                 </div>
                 <!--제목 영역-->
@@ -140,7 +142,7 @@
                     </div>
                     <!--제목 입력-->
                     <div class="col" style="width: 90%; text-align: left;" id="">
-                        <!--th:type="${recipevlew.recipeIntro}"--><p class="form-control pla-col input-box-sty"
+                       <p  th:text="${detailQna.qTitle}" class="form-control pla-col input-box-sty"
                            style=" border-radius: 2em; height: 50px; padding: 12px 20px 10px 20px;">dsfadfaf</p>
                     </div>
                 </div>
@@ -153,7 +155,7 @@
                     </div>
                     <!--내용 입력-->
                     <div class="col" style="width: 90%; text-align: left;" id="#">
-                        <!--th:type="${recipevlew.recipeIntro}"--><p class="form-control pla-col input-box-sty"
+                        <p th:text="${detailQna.qContent}" class="form-control pla-col input-box-sty"
                            style=" border-radius: 2em; height: 200px; padding: 15px 20px 10px 20px;">dsfadfaf</p>
                     </div>
                 </div>
@@ -167,7 +169,7 @@
                     <!--내용 입력-->
                     <div class="col" style=" width: 90%;">
                 <textarea class="form-control pla-col input-box-sty"
-                          style="height: 300px; resize: none; border-radius: 1em;"
+                          style="height: 300px; resize: none; border-radius: 1em;" name="acontent"
                           placeholder="답변을 입력해 주세요."></textarea>
                     </div>
                 </div>
@@ -180,12 +182,13 @@
                 </button>
             </div>
             <div style="margin-left: 30px;">
-                <button type="button" class="btn btn-outline-primary but-off-color"
+                <button type="submit" class="btn btn-outline-primary but-off-color"
                         onclick="return confirm('게시글 답변을 하시겠습니까?')">
                     답변하기
                 </button>
             </div>
         </div>
+        </form>
     </main>
     <script>
         //이전 버튼 클릭 시 main 화면으로 이동
