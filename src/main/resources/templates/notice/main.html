@@ -119,15 +119,19 @@
         </thead>
         <!--게시글1 _ 이 부분이 반복...삽입 되어야 함....!!!-->
         <tbody>
+        <th:block th:each="noticeList:${notice}">
         <tr class="fon-color">
-          <td>1</td>
+
+          <td th:text="${noticeList.notiNum}"></td>
           <td>
             <a href="QnA 상세페이지.html">
-              <b>공지입니다.</b>
+              <b th:text="${noticeList.nTitle}"></b>
             </a>
           </td>
-          <td>2023.06.06</td>
+          <td th:text="${noticeList.nDate}"></td>
+
         </tr>
+        </th:block>
         </tbody>
       </table>
     </div>

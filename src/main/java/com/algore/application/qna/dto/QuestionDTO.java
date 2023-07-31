@@ -21,6 +21,13 @@ public class QuestionDTO {
         this.id = id;
     }
 
+
+    public QuestionDTO(int qNumber, String qTitle, String qContent) {
+        this.qNumber = qNumber;
+        this.qTitle = qTitle;
+        this.qContent = qContent;
+    }
+
     public QuestionDTO() {
     }
 

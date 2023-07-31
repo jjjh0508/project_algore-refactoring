@@ -43,8 +43,9 @@ public class JoinService {
 
     public String findName(String userName) {
         String findName = mapper.findId(userName);
-
+        System.out.println(findName);
         return findName;
+
     }
 }
 

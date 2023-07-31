@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algore.application.notice.dao.NoticeMapper">
+
+
+    <resultMap id="noticeListMap" type="com.algore.application.notice.dto.NoticeDTO">
+        <id property="notiNum" column="N_NUM"/>
+        <result property="nTitle" column="N_TITLE"/>
+        <result property="nDate" column="N_DATE"/>
+    </resultMap>
+
+
+    <select id="noticeList" resultMap="noticeListMap">
+        SELECT
+            N_NUM,
+            N_TITLE ,
+            N_DATE
+        FROM NOTIFICATION
+    </select>
+</mapper>
