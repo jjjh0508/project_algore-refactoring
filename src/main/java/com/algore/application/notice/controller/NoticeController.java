@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -45,8 +46,20 @@ public class NoticeController {
     }
 
     @PostMapping("/write")
-    public ModelAndView writeNotice(ModelAndView modelAndView) {
+    public ModelAndView writeNotice(ModelAndView modelAndView , NoticeDetailDTO noticeDetailDTO, RedirectAttributes redirectAttributes) {
+        int result = noticeService.writeNotice(noticeDetailDTO);
+        if (result > 0) {
+            System.out.println("성공");
+            redirectAttributes.addFlashAttribute("message","등록 성공했습니다");
+            modelAndView.setViewName("redirect:/notice/main");
+
+        }else {
+            System.out.println("실패");
+            redirectAttributes.addFlashAttribute("message","등록에 실패했습니다");
+            modelAndView.setViewName("redirect:/notice/main");
+        }
         return  modelAndView;
+
     }
 
 

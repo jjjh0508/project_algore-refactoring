@@ -62,24 +62,26 @@
     <div>
         <div class="" style="max-width: 700px; margin: 0 auto; padding-left:10px; padding-right: 10px;">
             <div class="form-floating w-100 ">
-                <h6><span class="title_span "></span>제목</h6>
-                <input type="text" class="form-control" id="floatingTextarea2" name="recipeName">
+                <form action="/notice/write" method="post">
+                <h6><span class="title_span"  ></span>제목</h6>
+                <input type="text" class="form-control" id="floatingTextarea" name="nTitle">
             </div>
-            <div class="form-floating w-100" style="margin-top: 30px;">
+            <div class="form-floating w-100"  style="margin-top: 30px;">
                 <h6><span class="title_span"></span>내용</h6>
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                <textarea class="form-control" name="detail" placeholder="Leave a comment here" id="floatingTextarea2"
                           style="height: 200px; resize: none;"></textarea>
             </div>
             <!--취소, 등록 버튼-->
             <div class="btn_area d-flex justify-content-end new-margin" style="text-align: center;">
                 <button type="button" class="btn btn-outline-primary but-off-color" style="margin-right: 10px;"
                         onclick="return confirm('취소하시겠습니까?')">
-                    <a href="목록조회페이지.html">취소</a></button>
-                <button type="button" class="btn btn-outline-primary but-off-color"
+                    <a href="/notice/main">취소</a></button>
+                <button type="submit" class="btn btn-outline-primary but-off-color"
                         onclick="return confirm('등록하시겠습니까?')">
-                    <a href="목록조회페이지.html">등록</a></button>
+                    등록</button>
             </div>
         </div>
+        </form>
     </div>
     </body>
 </th:block>

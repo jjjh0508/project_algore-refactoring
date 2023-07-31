@@ -34,4 +34,12 @@
         WHERE N_NUM= #{notiNum}
 
     </select>
+
+    <insert id="writeNotice" parameterType="com.algore.application.notice.dto.NoticeDetailDTO">
+        INSERT INTO NOTIFICATION
+        (N_NUM, N_TITLE , N_DETAIL, N_DATE)
+        VALUES (
+                   SEQ_N_NUM.NEXTVAL,#{nTitle} ,#{detail} ,SYSDATE
+               )
+    </insert>
 </mapper>

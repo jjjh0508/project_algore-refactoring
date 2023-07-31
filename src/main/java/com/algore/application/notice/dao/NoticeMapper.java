@@ -12,4 +12,6 @@ public interface NoticeMapper {
     List<NoticeDTO> noticeList();
 
     NoticeDetailDTO detailRead(int notiNum);
+
+    int writeNotice(NoticeDetailDTO noticeDetailDTO);
 }

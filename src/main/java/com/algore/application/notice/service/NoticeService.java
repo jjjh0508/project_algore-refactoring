@@ -27,4 +27,9 @@ public class NoticeService {
         NoticeDetailDTO noticeDetailDTO = noticeMapper.detailRead(notiNum);
         return noticeDetailDTO;
     }
+
+    public int writeNotice(NoticeDetailDTO noticeDetailDTO) {
+        int reuslt = noticeMapper.writeNotice(noticeDetailDTO);
+        return reuslt;
+    }
 }
