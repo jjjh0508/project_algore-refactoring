@@ -17,15 +17,15 @@ public class JoinService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<UserMemberDTO> selectAll() { //프론트 화면
-        List<UserMemberDTO> dto = mapper.selectAll();
-        return dto;
-    }
+//    public List<UserMemberDTO> selectAll() { //프론트 화면
+//        List<UserMemberDTO> dto = mapper.selectAll();
+//        return dto;
+//    }
 //멤버DTO리턴 -- 주석하면 화면 호출된다 아래부분 수정 해 봐잉~
 
-    public List<UserMemberDTO> getAllMembers() {
-        return mapper.selectAll();
-    }
+//    public List<UserMemberDTO> getAllMembers() {
+//        return mapper.selectAll();
+//    }
 
 
 

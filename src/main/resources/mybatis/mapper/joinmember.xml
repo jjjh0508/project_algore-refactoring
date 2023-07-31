@@ -55,6 +55,25 @@
         WHERE ID = #{userName}
     </select>
 
+
+    <!--    로그인에 들어가는 쿼리-->
+    <resultMap id="authUser" type="com.algore.application.auth.AuthUserDTO">
+        <id property="memNum" column="MEM_NUM"/>
+        <result property="username" column="ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="nickName" column="NICKNAME"/>
+        <result property="role" column="ROLE"/>
+    </resultMap>
+    <!--    로그인에 들어가는 쿼리-->
+
+    <select id="loginSham"  parameterType="String" resultMap="authUser">
+        SELECT
+            *
+        FROM MEMBER
+        WHERE ID = #{username}
+    </select>
+
+
     <!--    <update id="reqistUserMemberDTO" parameterType="com.algore.application.user.dto.UserMemberDTO">-->
     <!--        UPDATE MEMBER()-->
     <!--        SET-->

@@ -1,10 +1,13 @@
 package com.algore.application.notice.controller;
 
+import com.algore.application.auth.AuthUserDTO;
 import com.algore.application.notice.dto.NoticeDTO;
 import com.algore.application.notice.dto.NoticeDetailDTO;
 import com.algore.application.notice.service.NoticeService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,8 +34,21 @@ public class NoticeController {
     }
 
     @GetMapping("/write")
-    public void write() {
+    public ModelAndView  write(Authentication authentication, ModelAndView modelAndView) {
+        AuthUserDTO authUserDTO = (AuthUserDTO)authentication.getPrincipal();
+       if(authUserDTO.getRole().equals("ADMIN")){
+           modelAndView.setViewName("/notice/write");
+           return modelAndView;
+       }
+        modelAndView.setViewName("redirect:/notice/main");
+        return modelAndView;
     }
+
+    @PostMapping("/write")
+    public ModelAndView writeNotice(ModelAndView modelAndView) {
+        return  modelAndView;
+    }
+
 
     @GetMapping("/read")
     public ModelAndView read( ModelAndView modelAndView, @RequestParam("notice") int notiNum) {

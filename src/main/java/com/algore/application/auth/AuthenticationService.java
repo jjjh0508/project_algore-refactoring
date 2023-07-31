@@ -1,6 +1,7 @@
 package com.algore.application.auth;
 
 import com.algore.application.employee.dao.LoginTestMapper;
+import com.algore.application.user.dao.JoinMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,12 +15,12 @@ import java.util.Objects;
 public class AuthenticationService implements UserDetailsService {
     // 매퍼 등록 후 사용자의 이름으로 조회하는 로직
 
-    private final LoginTestMapper loginTestMapper;
+    private final JoinMapper JoinMapper;
         private final PasswordEncoder passwordEncoder;
 
 
-    public AuthenticationService(LoginTestMapper loginTestMapper, PasswordEncoder passwordEncoder) {
-        this.loginTestMapper = loginTestMapper;
+    public AuthenticationService(com.algore.application.user.dao.JoinMapper joinMapper, PasswordEncoder passwordEncoder) {
+        JoinMapper = joinMapper;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -31,7 +32,7 @@ public class AuthenticationService implements UserDetailsService {
 //        System.out.println(passwordEncoder.encode("2222"));
         // mapper에서 가져와야함
         // 현재는 가상의 값을 넣어서 반환하는 로직으로 작성됨
-        AuthUserDTO authUserDTO = loginTestMapper.loginSham(username);
+        AuthUserDTO authUserDTO = JoinMapper.loginSham(username);
 
         System.out.println(authUserDTO);
         if(Objects.isNull(authUserDTO)){

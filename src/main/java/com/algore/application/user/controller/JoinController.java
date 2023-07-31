@@ -22,15 +22,15 @@ public class JoinController {
 //    @Value("${open-api.key}")
 //    private String apikey;
 
-    @GetMapping("/memberList")
-    public ModelAndView selectAll(ModelAndView mv) { //프론트 화면
-        List<UserMemberDTO> memberList = joinService.selectAll();
-
-        mv.addObject("memberList", memberList);
-
-        mv.setViewName("user/memberList");
-        return mv;
-    }
+//    @GetMapping("/memberList")
+//    public ModelAndView selectAll(ModelAndView mv) { //프론트 화면
+//        List<UserMemberDTO> memberList = joinService.selectAll();
+//
+//        mv.addObject("memberList", memberList);
+//
+//        mv.setViewName("user/memberList");
+//        return mv;
+//    }
 
 //    @GetMapping("/regist")
 //    public JoinService getJoinService() {
