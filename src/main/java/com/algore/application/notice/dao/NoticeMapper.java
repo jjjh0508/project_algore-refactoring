@@ -1,6 +1,7 @@
 package com.algore.application.notice.dao;
 
 import com.algore.application.notice.dto.NoticeDTO;
+import com.algore.application.notice.dto.NoticeDetailDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,4 +10,6 @@ import java.util.List;
 public interface NoticeMapper {
 
     List<NoticeDTO> noticeList();
+
+    NoticeDetailDTO detailRead(int notiNum);
 }

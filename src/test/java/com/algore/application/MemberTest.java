@@ -22,7 +22,6 @@ public class MemberTest {
     public RecipeService recipeService;
     @Autowired
     public AuthenticationService authenticationService;
-
     @Autowired
     public QuestionService questionService;
 

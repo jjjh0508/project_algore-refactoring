@@ -69,22 +69,23 @@
     <div>
         <div class="" style="max-width: 700px; margin: 0 auto; padding-left:10px; padding-right: 10px; ">
             <div class="form-floating w-100 ">
-                <input type="text" class="form-control border-none" id="floatingTextarea2" name="recipeName" readonly
-                       value="공지 제목이 나오는 부분">
+                <input type="text" th:value="${detail.nTitle}" class="form-control border-none" id="floatingTextarea3"  readonly>
             </div>
             <div class="form-floating w-100" style="margin-top: 30px;">
-                <textarea class="form-control border-none" placeholder="Leave a comment here" id="floatingTextarea2"
+                <textarea  th:text="${detail.detail}" class="form-control border-none" placeholder="Leave a comment here" id="floatingTextarea2"
                           style="height: 200px;  resize: none;" readonly> 공지 내용이 나오는 부분
                     </textarea>
             </div>
+            <div sec:authorize="hasAuthority('ADMIN')">
             <!--수정, 등록 버튼-->
-            <div class="btn_area d-flex justify-content-end new-margin" style="text-align: center;">
+                <div class="btn_area d-flex justify-content-end new-margin" style="text-align: center;">
                 <button type="button" class="btn btn-outline-primary but-off-color" style="margin-right: 10px;"
                         onclick="return confirm('수정하시겠습니까?')">
                     <a href="등록페이지.html">수정</a></button>
                 <button type="button" class="btn btn-outline-primary but-off-color"
                         onclick="return confirm('삭제하시겠습니까?')">
                     <a href="목록조회페이지.html">삭제</a></button>
+            </div>
             </div>
         </div>
     </div>

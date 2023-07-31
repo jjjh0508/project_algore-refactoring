@@ -124,7 +124,7 @@
 
           <td th:text="${noticeList.notiNum}"></td>
           <td>
-            <a href="QnA 상세페이지.html">
+            <a th:href="@{/notice/read(notice=${noticeList.notiNum}) }">
               <b th:text="${noticeList.nTitle}"></b>
             </a>
           </td>

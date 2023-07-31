@@ -11,6 +11,11 @@
         <result property="nDate" column="N_DATE"/>
     </resultMap>
 
+    <resultMap id="detailReadMap" type="com.algore.application.notice.dto.NoticeDetailDTO">
+        <result property="nTitle" column="N_TITLE"/>
+        <result property="detail" column="N_DETAIL"/>
+    </resultMap>
+
 
     <select id="noticeList" resultMap="noticeListMap">
         SELECT
@@ -18,5 +23,15 @@
             N_TITLE ,
             N_DATE
         FROM NOTIFICATION
+    </select>
+
+
+    <select id="detailRead" resultMap="detailReadMap">
+        SELECT
+            N_TITLE,
+            N_DETAIL
+        FROM NOTIFICATION
+        WHERE N_NUM= #{notiNum}
+
     </select>
 </mapper>
