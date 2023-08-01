@@ -55,6 +55,7 @@ public class QuestionService {
 
     public AnswerDTO reedAnswer(int qNumber) {
         AnswerDTO answerDTO = detailMapper.reedAnswer(qNumber);
+        System.out.println(answerDTO);
         return answerDTO;
     }
 }

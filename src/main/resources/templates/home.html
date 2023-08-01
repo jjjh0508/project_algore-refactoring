@@ -161,7 +161,9 @@
                 <li class="page-item"
                     th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
                     th:each="pageButton : ${#numbers.sequence(start, end)}">
+                    <th:block th:if="${pageButton}!=0">
                     <a class="page-link" th:href="@{?page={page} (page = ${pageButton})}" th:text="${pageButton}"></a>
+                    </th:block>
                 </li>
             </th:block>
             <li class="page-item">

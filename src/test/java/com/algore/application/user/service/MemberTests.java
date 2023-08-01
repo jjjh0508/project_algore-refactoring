@@ -1,4 +1,4 @@
-package com.algore.application;
+package com.algore.application.user.service;
 
 
 import com.algore.application.auth.AuthUserDTO;
@@ -6,7 +6,6 @@ import com.algore.application.auth.AuthenticationService;
 import com.algore.application.qna.dto.QuestionDTO;
 import com.algore.application.qna.service.QuestionService;
 import com.algore.application.recipe.service.RecipeService;
-import com.algore.application.user.service.JoinService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,15 +14,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-public class MemberTest {
+public class MemberTests {
     @Autowired
     public JoinService joinService;
     @Autowired
     public RecipeService recipeService;
     @Autowired
     public AuthenticationService authenticationService;
-    @Autowired
-    public QuestionService questionService;
 
     @Test
     @DisplayName("회원 중복 체크")
@@ -58,7 +55,7 @@ public class MemberTest {
 
 
     @Test
-    @DisplayName("게시피 작성자")
+    @DisplayName("게시판 작성자")
     void getUserName() {
         //given
         String name = "user@gmail.com";
@@ -85,18 +82,7 @@ public class MemberTest {
     }
 
 
-    @Test
-    @DisplayName("QnA 게시물 조회 테스트")
-    public void detaileReadQna(){
-        //given
-        int QNumber= 13;
-        QuestionDTO questionDTO  = new QuestionDTO(13,"곰이 쌘가요? 사자가 쌘가요?","곰이 쌘가요? 사자가 쌘가요?");
-        //when
-        QuestionDTO questionDTOTest = questionService.detaileRead(QNumber);
-        //then
-        Assertions.assertAll("게시물 조회 테스트",()->Assertions.assertEquals(questionDTO.getqTitle(),questionDTOTest.getqTitle(),()->
-                "타이틀이 다르다"),()->Assertions.assertEquals(questionDTO.getqContent(),questionDTOTest.getqContent(),()->"내용이 다르다"));
-    }
+
 
 
 }

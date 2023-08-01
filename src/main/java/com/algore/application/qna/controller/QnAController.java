@@ -30,7 +30,6 @@ public class QnAController {
 
     @GetMapping("/main")
     public ModelAndView main(ModelAndView mv) {
-        System.out.println("dd");
         List<QuestionDTO> lists = detail.questionAll();
         for (QuestionDTO questionDTO: lists) {
             System.out.println("메인입니다.: " + questionDTO);
@@ -51,13 +50,12 @@ public class QnAController {
         if(answerDTO!=null){
             model.addObject("answerDTO",answerDTO);
         }
-        System.out.println("dd");
-        //detailQna.setqNumber(qNumber);
+
+
 
 //        //받아온 값 확인
         System.out.println("read 입니다 " + detailQna);
-//
-//
+
 //        //오브젝트 연결
         model.addObject("detail", detailQna);
         model.setViewName("qna/read");
