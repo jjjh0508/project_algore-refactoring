@@ -7,13 +7,14 @@ public class NoticeDetailDTO {
 
     private String nTitle;
     private String detail;
-
+    private  int notiNum;
     public NoticeDetailDTO() {
     }
 
-    public NoticeDetailDTO(String nTitle, String detail) {
+    public NoticeDetailDTO(String nTitle, String detail, int notiNum) {
         this.nTitle = nTitle;
         this.detail = detail;
+        this.notiNum = notiNum;
     }
 
     public String getnTitle() {
@@ -32,11 +33,20 @@ public class NoticeDetailDTO {
         this.detail = detail;
     }
 
+    public int getNotiNum() {
+        return notiNum;
+    }
+
+    public void setNotiNum(int notiNum) {
+        this.notiNum = notiNum;
+    }
+
     @Override
     public String toString() {
         return "NoticeDetailDTO{" +
                 "nTitle='" + nTitle + '\'' +
                 ", detail='" + detail + '\'' +
+                ", notiNum=" + notiNum +
                 '}';
     }
 }

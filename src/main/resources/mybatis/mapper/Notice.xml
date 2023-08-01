@@ -23,6 +23,7 @@
             N_TITLE ,
             N_DATE
         FROM NOTIFICATION
+        WHERE N_STATUS = 'Y'
     </select>
 
 
@@ -31,7 +32,7 @@
             N_TITLE,
             N_DETAIL
         FROM NOTIFICATION
-        WHERE N_NUM= #{notiNum}
+        WHERE N_NUM= #{notiNum} AND N_STATUS = 'Y'
 
     </select>
 
@@ -42,4 +43,19 @@
                    SEQ_N_NUM.NEXTVAL,#{nTitle} ,#{detail} ,SYSDATE
                )
     </insert>
+
+    <update id="modifyNotice" parameterType="com.algore.application.notice.dto.NoticeDetailDTO">
+        UPDATE NOTIFICATION
+        SET N_TITLE = #{nTitle},
+            N_DETAIL =#{detail},
+            N_MODI_DATE = SYSDATE
+        WHERE N_NUM =#{notiNum}
+    </update>
+
+
+    <update id="deleteNotice">
+        UPDATE NOTIFICATION
+        SET N_STATUS = 'N'
+        WHERE  N_NUM =#{notiNum}
+    </update>
 </mapper>

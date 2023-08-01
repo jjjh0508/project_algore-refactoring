@@ -32,4 +32,14 @@ public class NoticeService {
         int reuslt = noticeMapper.writeNotice(noticeDetailDTO);
         return reuslt;
     }
+
+    public int modifyNotice(NoticeDetailDTO noticeDetailDTO) {
+        int result = noticeMapper.modifyNotice(noticeDetailDTO);
+        return result;
+    }
+
+    public int deleteNotice(int notiNum) {
+        int result =noticeMapper.deleteNotice(notiNum);
+        return result;
+    }
 }

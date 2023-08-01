@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <title>error</title>
 </head>
+<script th:inline="javascript">
+
+    let message = [[${message}]];
+
+    if (message != null && message !== '') {
+        alert(message);
+        location.href = "/home?page=1";
+    }
+
+
+</script>
 <body>
 
 </body>

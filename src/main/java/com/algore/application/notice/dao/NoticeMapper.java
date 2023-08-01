@@ -14,4 +14,8 @@ public interface NoticeMapper {
     NoticeDetailDTO detailRead(int notiNum);
 
     int writeNotice(NoticeDetailDTO noticeDetailDTO);
+
+    int modifyNotice(NoticeDetailDTO noticeDetailDTO);
+
+    int deleteNotice(int notiNum);
 }

@@ -279,7 +279,7 @@ public class RecipeController {
             //대표 사진 로직
             MultipartFile mainFile = recipeviewDTO.getMainInputFile();
             String mainFilename = mainFile.getOriginalFilename();
-            //파일 이름이 널이 아닐때 만 실행
+            //파일 이름이 비어있지 않을때
 
             if (!mainFile.isEmpty()) {
                 File profileFile = new File(root + recipeviewDTO.getMainFileName());
