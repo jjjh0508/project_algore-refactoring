@@ -9,6 +9,8 @@
 <br><br>
 
 ## 프로젝트 소개
+프로젝트 끝나고 완성하지 못한 부분 개인적으로 개발한 레파지토리입니다.
+
 
 ### [ 개요 ]
 - 명칭 &nbsp;:&nbsp; <u>***알고레***</u> (algore)
@@ -20,7 +22,7 @@
 
 ### [ 작업 ]
 - [Algore_Repositories](https://github.com/jjjh0508/project_algore/)
-- [Algore_refactoring](https://github.com/jjjh0508/project_algore-refactoring)
+- [Algore_Refactoring](https://github.com/jjjh0508/project_algore-refactoring)
 
 <br>
 
