@@ -20,8 +20,7 @@
 
 ### [ 작업 ]
 - [Algore_Repositories](https://github.com/jjjh0508/project_algore/)
-- 프로젝트 끝나고 완성 하지 못한 부분 개인적으로 추가하였습니다.
-- [refactoring](https://github.com/jjjh0508/project_algore-refactoring)
+- [Algore_refactoring](https://github.com/jjjh0508/project_algore-refactoring)
 
 <br>
 
