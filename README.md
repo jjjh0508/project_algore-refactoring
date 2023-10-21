@@ -66,7 +66,7 @@
 <br>
 
 ### [ 기술스택 및 개발 환경 ]
-<img width="700" alt="알고레 로고 이미지" src="https://github.com/Teddybear-6/.github/assets/130436337/4a56121d-30ff-493f-a698-8096b63e248b">
+<img width="700" alt="알고레 기술스택 및 개발환경" src="https://github.com/bearnyong/algore/assets/130436337/34a4ce65-dd9f-46fd-a3c8-ec08d0c8ae87">
 
 <br>
 
