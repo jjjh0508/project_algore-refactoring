@@ -14,7 +14,7 @@
 
 ### [ 개요 ]
 - 명칭 &nbsp;:&nbsp; <u>***알고레***</u> (algore)
-- 개발 인원 &nbsp;:&nbsp; 7명 (Team_ 전지환)
+- 개발 인원 &nbsp;:&nbsp; 6명 (Team_ 전지환)
 - 개발 기간 &nbsp;:&nbsp; 2023.07.06 ~ 2023.07.23
 - [알고레(algore) PPT.pdf](https://github.com/Teddybear-6/.github/files/12897588/-.__.pdf)
 
